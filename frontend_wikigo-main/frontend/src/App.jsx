@@ -9,13 +9,17 @@ import axios from "axios";
 
 const fetchResults = async (searchQuery) => {
   try {
-    const response = await axios.post('http://localhost:8080/v1/api/search', { search: searchQuery });
+    const url = `http://localhost:8080/v1/api/search?query=${encodeURIComponent(searchQuery)}`;
+    const response = await axios.get(url);
     return response.data;
   } catch (error) {
     console.error('Error fetching search results:', error);
     return [];
   }
 };
+
+
+
 
 
 
