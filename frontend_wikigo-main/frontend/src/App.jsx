@@ -6,9 +6,25 @@ import Com_Sorte from "./components/sorte";
 import axios from "axios";
 
 
+
+const fetchResults = async (searchQuery) => {
+  try {
+    const response = await axios.post('http://localhost:8080/v1/api/search', { search: searchQuery });
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching search results:', error);
+    return [];
+  }
+};
+
+
+
+
 function App() {
   const [inputValueLocation, setInputValueLocation] = useState("Alfenas");
   const [location, setLocation] = useState("Alfenas");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
 
 
 
@@ -16,6 +32,16 @@ function App() {
     e.preventDefault();
     setLocation(inputValueLocation);
   }
+
+
+  const handleSearchSubmit = async (e) => {
+    e.preventDefault();
+    const results = await fetchResults(searchQuery);
+    setSearchResults(results);
+    console.log(results); 
+  };
+  
+  
 
   return (
     <div className="App">
@@ -25,12 +51,14 @@ function App() {
       <h1>WIKI GO</h1>
 
       <div className="form">
-        <form>
-          <div>
-            <label>
-              <input type="busca" name="busca" />
-            </label>
-          </div>
+        <form onSubmit={handleSearchSubmit}>
+          <input
+            type="text"
+            name="search"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+          <button type="submit">Search</button>
         </form>
       </div>
 
@@ -40,9 +68,7 @@ function App() {
           <input
             type="text"
             value={inputValueLocation}
-            onChange={(e) => {
-              setInputValueLocation(e.target.value);
-            }}
+            onChange={(e) => setInputValueLocation(e.target.value)}
           />
           <button type="submit">Change Location</button>
         </form>
