@@ -3,6 +3,8 @@ import wikiLogo from "/LOGO_NOVO.png";
 import "./App.css";
 import WeatherWidget from "./components/weather";
 import Com_Sorte from "./components/sorte";
+import axios from "axios";
+
 
 function App() {
   const [inputValueLocation, setInputValueLocation] = useState("Alfenas");
