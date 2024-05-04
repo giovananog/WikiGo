@@ -15,6 +15,10 @@
   --form_color: #333333;
 }
 
+*{
+  transition: all 0.3s ease-in-out;
+}
+
 
 html, body {
   height: 100%;
