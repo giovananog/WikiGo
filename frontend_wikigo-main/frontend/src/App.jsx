@@ -5,7 +5,6 @@ import WeatherWidget from "./components/weather";
 import axios from "axios";
 import DarkMode from "./components/DarkMode/DarkMode";
 
-
 function App() {
   const [inputValueLocation, setInputValueLocation] = useState("Alfenas");
   const [location, setLocation] = useState("Alfenas");
@@ -14,54 +13,56 @@ function App() {
 
   const fetchResults = async (searchQuery) => {
     try {
-      const url = `http://localhost:8080/v1/api/search?query=${encodeURIComponent(searchQuery)}`;
+      const url = `http://localhost:8080/v1/api/search?query=${encodeURIComponent(
+        searchQuery
+      )}`;
       const response = await axios.get(url);
       return response.data;
     } catch (error) {
-      console.error('Error fetching search results:', error);
+      console.error("Error fetching search results:", error);
       return [];
     }
   };
 
-
   const hadleSubmitLocation = (e) => {
     e.preventDefault();
     setLocation(inputValueLocation);
-  }
-
+  };
 
   const handleSearchSubmit = async (e) => {
     e.preventDefault();
     const results = await fetchResults(searchQuery);
     setSearchResults(results);
-    console.log(results); 
+    console.log(results);
   };
-  
-  
 
   return (
     <div className="App">
-      <div><DarkMode /></div>
-      <div>
-        <img src={wikiLogo} className="logo" alt="WikiGO" />
+      <div className="DarkModeButton">
+        <DarkMode />
       </div>
-      <h1>WIKI GO</h1>
+      <div className="Central">
+        <div>
+          <img src={wikiLogo} className="logo" alt="WikiGO" />
+        </div>
+        <h1>WIKI GO</h1>
 
-      <div className="form">
-        <form onSubmit={handleSearchSubmit}>
-          <input
-            type="text"
-            name="search"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-          />
-          <button type="submit">Search</button>
-        </form>
+        <div className="formSearch">
+          <form onSubmit={handleSearchSubmit}>
+            <input
+              type="text"
+              name="search"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+            <button type="submit">Search</button>
+          </form>
+        </div>
       </div>
 
       <div className="widget">
         <WeatherWidget location={location} />
-        <form onSubmit={hadleSubmitLocation}>
+        <form className="formWidget" onSubmit={hadleSubmitLocation}>
           <input
             type="text"
             value={inputValueLocation}
