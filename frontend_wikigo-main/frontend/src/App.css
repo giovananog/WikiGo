@@ -50,12 +50,22 @@ h1 {
   padding-left: 25px;
 }
 
-.formWidget{
-  display: flex;
-  justify-content: left;
-  align-items: center;
-  text-align: center;
+.formWidget input{
+  background: var(--form_color);
+  border-radius: 40px;
+  width: 8em;
+  height: 1.5em;
   margin-top: 5px;
+  text-align: left;
+  color: var(--text_color);
+  display: flex;
+  border: none;
+  outline: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: medium;
+  padding-left: 20px;
 }
 
 .DarkModeButton{
