@@ -1,9 +1,9 @@
 :root {
-  --body_background: rgb(212, 206, 206);
+  --body_background: rgb(243, 216, 182);
   --body_color: black;
   --link_color: navy;
   --text_color: black;
-  --form_color: rgb(196, 191, 191);
+  --form_color: rgb(255, 255, 255);
   
 }
 
@@ -18,7 +18,6 @@
 *{
   transition: all 0.3s ease-in-out;
 }
-
 
 html, body {
   height: 100%;
