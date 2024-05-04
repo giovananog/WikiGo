@@ -1,3 +1,21 @@
+:root {
+  --body_background: rgb(212, 206, 206);
+  --body_color: black;
+  --link_color: navy;
+  --text_color: black;
+  --form_color: rgb(196, 191, 191);
+  
+}
+
+[data-theme="dark"] {
+  --body_background: #111111;
+  --body_color: white;
+  --link_color: lightblue;
+  --text_color: white;
+  --form_color: #333333;
+}
+
+
 html, body {
   height: 100%;
 }
@@ -6,6 +24,6 @@ body {
   font-family: "Alegreya SC", serif;
   margin: 0;
   padding: 0;
-  background: #111111;
-  color: white;
+  background: var(--body_background);
+  color: var(--body_color);
 }

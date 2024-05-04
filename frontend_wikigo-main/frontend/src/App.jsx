@@ -2,26 +2,8 @@ import { useState } from "react";
 import wikiLogo from "/LOGO_NOVO.png";
 import "./App.css";
 import WeatherWidget from "./components/weather";
-import Com_Sorte from "./components/sorte";
 import axios from "axios";
-
-
-
-const fetchResults = async (searchQuery) => {
-  try {
-    const url = `http://localhost:8080/v1/api/search?query=${encodeURIComponent(searchQuery)}`;
-    const response = await axios.get(url);
-    return response.data;
-  } catch (error) {
-    console.error('Error fetching search results:', error);
-    return [];
-  }
-};
-
-
-
-
-
+import DarkMode from "./components/DarkMode/DarkMode";
 
 
 function App() {
@@ -30,6 +12,16 @@ function App() {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
 
+  const fetchResults = async (searchQuery) => {
+    try {
+      const url = `http://localhost:8080/v1/api/search?query=${encodeURIComponent(searchQuery)}`;
+      const response = await axios.get(url);
+      return response.data;
+    } catch (error) {
+      console.error('Error fetching search results:', error);
+      return [];
+    }
+  };
 
 
   const hadleSubmitLocation = (e) => {
@@ -49,6 +41,7 @@ function App() {
 
   return (
     <div className="App">
+      <div><DarkMode /></div>
       <div>
         <img src={wikiLogo} className="logo" alt="WikiGO" />
       </div>
