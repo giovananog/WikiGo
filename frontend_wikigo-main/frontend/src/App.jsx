@@ -13,7 +13,7 @@ function App() {
 
   const fetchResults = async (searchQuery) => {
     try {
-      const url = `http://localhost:8080/v1/api/search?query=${encodeURIComponent(
+      const url = `http://localhost:8080/v1/search?query=${encodeURIComponent(
         searchQuery
       )}`;
       const response = await axios.get(url);
