@@ -21,17 +21,17 @@ function Answers() {
         <ul>
           {results.slice(0, visibleCount).map((result, index) => (
             <li key={index}>
-              <h2>{result.title}</h2>
-              <a href={result.url} target="_blank" rel="noopener noreferrer">Read more</a>
+              <p><a href={result.url} target="_blank" rel="noopener noreferrer">{result.url}</a></p>
+              <h2><a href={result.url} target="_blank" rel="noopener noreferrer">{result.title}</a></h2>
               <p>{result.abs}</p>
             </li>
           ))}
         </ul>
       ) : (
-        <p>No results found.</p>
+        <p>Nenhum resultado encontrado.</p>
       )}
       {visibleCount < results.length && (
-        <button onClick={loadMore}>Load More Results</button>
+        <button onClick={loadMore}>Mais Resultados</button>
       )}
     </div>
   );
