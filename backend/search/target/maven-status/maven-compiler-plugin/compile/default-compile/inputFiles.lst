@@ -1,0 +1,8 @@
+/home/lucas/Documentos/WikiGo/backend/search/target/generated-sources/openapi/src/main/java/com/elasticsearch/search/api/facade/ApiUtil.java
+/home/lucas/Documentos/WikiGo/backend/search/src/main/java/com/elasticsearch/search/SearchApplication.java
+/home/lucas/Documentos/WikiGo/backend/search/src/main/java/com/elasticsearch/search/domain/EsClient.java
+/home/lucas/Documentos/WikiGo/backend/search/target/generated-sources/openapi/src/main/java/com/elasticsearch/search/api/model/Error.java
+/home/lucas/Documentos/WikiGo/backend/search/src/main/java/com/elasticsearch/search/service/SearchService.java
+/home/lucas/Documentos/WikiGo/backend/search/target/generated-sources/openapi/src/main/java/com/elasticsearch/search/api/model/Result.java
+/home/lucas/Documentos/WikiGo/backend/search/target/generated-sources/openapi/src/main/java/com/elasticsearch/search/api/facade/SearchApi.java
+/home/lucas/Documentos/WikiGo/backend/search/src/main/java/com/elasticsearch/search/controller/SearchController.java

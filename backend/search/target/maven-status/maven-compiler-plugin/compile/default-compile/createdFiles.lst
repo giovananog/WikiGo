@@ -1,0 +1,8 @@
+com/elasticsearch/search/api/facade/ApiUtil.class
+com/elasticsearch/search/api/model/Error.class
+com/elasticsearch/search/api/facade/SearchApi.class
+com/elasticsearch/search/domain/EsClient.class
+com/elasticsearch/search/api/model/Result.class
+com/elasticsearch/search/service/SearchService.class
+com/elasticsearch/search/SearchApplication.class
+com/elasticsearch/search/controller/SearchController.class
