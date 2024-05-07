@@ -1,11 +1,9 @@
 package com.elasticsearch.search.domain;
 
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
-import co.elastic.clients.elasticsearch._types.query_dsl.BoolQuery;
-import co.elastic.clients.elasticsearch._types.query_dsl.MatchPhraseQuery;
-import co.elastic.clients.elasticsearch._types.query_dsl.MatchQuery;
-import co.elastic.clients.elasticsearch._types.query_dsl.Query;
+import co.elastic.clients.elasticsearch._types.query_dsl.*;
 import co.elastic.clients.elasticsearch.core.SearchResponse;
+import co.elastic.clients.json.JsonData;
 import co.elastic.clients.json.jackson.JacksonJsonpMapper;
 import co.elastic.clients.transport.ElasticsearchTransport;
 import co.elastic.clients.transport.rest_client.RestClientTransport;
@@ -96,5 +94,15 @@ public class EsClient {
         return executeSearchQuery(matchQuery);
     }
 
+    //  search with dt_creation (range)
+    public SearchResponse searchWithDtCreation(String query, String... filter) {
+        Query matchQuery = BoolQuery.of(q -> q.should(MatchQuery.of(l -> l.field("content").query(query))._toQuery()).filter(RangeQuery.of(l -> l.field("dt_creation").lt(JsonData.of(filter[1])))._toQuery()))._toQuery();
+        return executeSearchQuery(matchQuery);
+    }
 
+    //  search with reading_time (range)
+    public SearchResponse searchWithReadingTime(String query, String... filter) {
+        Query matchQuery = BoolQuery.of(q -> q.should(MatchQuery.of(l -> l.field("content").query(query))._toQuery()).filter(RangeQuery.of(l -> l.field("reading_time").lt(JsonData.of(filter[1])))._toQuery()))._toQuery();
+        return executeSearchQuery(matchQuery);
+    }
 }
