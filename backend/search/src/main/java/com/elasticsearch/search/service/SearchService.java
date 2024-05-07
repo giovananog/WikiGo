@@ -18,7 +18,7 @@ public class SearchService {
         this.esClient = esClient;
     }
 
-    public List<Result> submitQuery(String query) {
+    public List<Result> submitQuery(String query, String... filter) {
         var searchResponse = esClient.search(query);
         List<Hit<ObjectNode>> hits = searchResponse.hits().hits();
 
