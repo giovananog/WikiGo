@@ -105,4 +105,10 @@ public class EsClient {
         Query matchQuery = BoolQuery.of(q -> q.should(MatchQuery.of(l -> l.field("content").query(query))._toQuery()).filter(RangeQuery.of(l -> l.field("reading_time").lt(JsonData.of(filter[1])))._toQuery()))._toQuery();
         return executeSearchQuery(matchQuery);
     }
+
+    //  search with fuzziness
+    public SearchResponse searchWithFuzziness(String query, String... filter) {
+        Query matchQuery = MatchQuery.of(q -> q.field("content").query(query).fuzziness(filter[1]))._toQuery();
+        return executeSearchQuery(matchQuery);
+    }
 }
