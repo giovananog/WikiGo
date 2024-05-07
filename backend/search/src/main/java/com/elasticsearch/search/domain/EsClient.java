@@ -1,6 +1,7 @@
 package com.elasticsearch.search.domain;
 
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
+import co.elastic.clients.elasticsearch._types.query_dsl.MatchPhraseQuery;
 import co.elastic.clients.elasticsearch._types.query_dsl.MatchQuery;
 import co.elastic.clients.elasticsearch._types.query_dsl.Query;
 import co.elastic.clients.elasticsearch.core.SearchResponse;
@@ -73,6 +74,12 @@ public class EsClient {
     // search without filter parameter
     public SearchResponse search(String query) {
         Query matchQuery = MatchQuery.of(q -> q.field("content").query(query))._toQuery();
+        return executeSearchQuery(matchQuery);
+    }
+
+    //  search with match_phrase
+    public SearchResponse searchWithMatchPhrase(String query, String... filter) {
+        Query matchQuery = MatchPhraseQuery.of(q -> q.field("content").query(query))._toQuery();;
         return executeSearchQuery(matchQuery);
     }
 }
