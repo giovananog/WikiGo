@@ -1,5 +1,4 @@
 package com.elasticsearch.search.service;
-
 import co.elastic.clients.elasticsearch.core.search.Hit;
 import com.elasticsearch.search.api.model.Result;
 import com.elasticsearch.search.domain.EsClient;
@@ -19,7 +18,36 @@ public class SearchService {
     }
 
     public List<Result> submitQuery(String query, String... filter) {
-        var searchResponse = esClient.search(query);
+        co.elastic.clients.elasticsearch.core.SearchResponse searchResponse = null;
+
+        if(filter == null || filter.length == 0) {
+            searchResponse = esClient.search(query);
+        } else {
+            switch (filter[0]) {
+                case "fuzziness":
+                    searchResponse = esClient.searchWithFuzziness(query, filter);
+                    break;
+                case "dt_creation":
+                    searchResponse = esClient.searchWithDtCreation(query, filter);
+                    break;
+                case "reading_time":
+                    searchResponse = esClient.searchWithReadingTime(query, filter);
+                    break;
+                case "match_phrase":
+                    searchResponse = esClient.searchWithMatchPhrase(query, filter);
+                    break;
+                case "and":
+                    searchResponse = esClient.searchWithOperatorAnd(query, filter);
+                    break;
+                case "mustNot":
+                    searchResponse = esClient.searchWithMustNot(query, filter);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        co.elastic.clients.elasticsearch.core.SearchResponse s =  searchResponse;
         List<Hit<ObjectNode>> hits = searchResponse.hits().hits();
 
         var resultsList = hits.stream().map(h ->
