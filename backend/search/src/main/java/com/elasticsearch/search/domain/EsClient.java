@@ -57,19 +57,22 @@ public class EsClient {
         elasticsearchClient = new co.elastic.clients.elasticsearch.ElasticsearchClient(transport);
     }
 
-    public SearchResponse search(String query) {
-        Query matchQuery = MatchQuery.of(q -> q.field("content").query(query))._toQuery();
 
-        SearchResponse<ObjectNode> response;
+    // execute query without filters
+    private SearchResponse<ObjectNode> executeSearchQuery(Query finalMatchQuery) {
         try {
-            response = elasticsearchClient.search(s -> s
-                .index("wikipedia").from(0).size(10)
-                .query(matchQuery), ObjectNode.class
+            return elasticsearchClient.search(s -> s
+                    .index("wikipedia").from(0).size(10000)
+                    .query(finalMatchQuery), ObjectNode.class
             );
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
 
-        return response;
+    // search without filter parameter
+    public SearchResponse search(String query) {
+        Query matchQuery = MatchQuery.of(q -> q.field("content").query(query))._toQuery();
+        return executeSearchQuery(matchQuery);
     }
 }
