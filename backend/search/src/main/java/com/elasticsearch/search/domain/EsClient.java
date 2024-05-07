@@ -1,6 +1,7 @@
 package com.elasticsearch.search.domain;
 
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
+import co.elastic.clients.elasticsearch._types.query_dsl.BoolQuery;
 import co.elastic.clients.elasticsearch._types.query_dsl.MatchPhraseQuery;
 import co.elastic.clients.elasticsearch._types.query_dsl.MatchQuery;
 import co.elastic.clients.elasticsearch._types.query_dsl.Query;
@@ -82,4 +83,18 @@ public class EsClient {
         Query matchQuery = MatchPhraseQuery.of(q -> q.field("content").query(query))._toQuery();;
         return executeSearchQuery(matchQuery);
     }
+
+    //  search with operator 'and'
+    public SearchResponse searchWithOperatorAnd(String query, String... filter) {
+        Query matchQuery = MatchPhraseQuery.of(q -> q.field("content").query(query))._toQuery();
+        return executeSearchQuery(matchQuery);
+    }
+
+    //  search with boolQuery 'mustNot'
+    public SearchResponse searchWithMustNot(String query, String... filter) {
+        Query matchQuery = BoolQuery.of(q -> q.should(MatchQuery.of(l -> l.field("content").query(query))._toQuery()).mustNot(MatchQuery.of(l -> l.field("content").query(filter[1]))._toQuery()))._toQuery();
+        return executeSearchQuery(matchQuery);
+    }
+
+
 }
