@@ -21,7 +21,7 @@ public class SearchService {
         co.elastic.clients.elasticsearch.core.SearchResponse searchResponse = null;
 
         if(filter == null || filter.length == 0) {
-            searchResponse = esClient.search(query);
+            searchResponse = esClient.searchWithoutFilters(query);
         } else {
             switch (filter[0]) {
                 case "fuzziness":
@@ -32,9 +32,6 @@ public class SearchService {
                     break;
                 case "reading_time":
                     searchResponse = esClient.searchWithReadingTime(query, filter);
-                    break;
-                case "match_phrase":
-                    searchResponse = esClient.searchWithMatchPhrase(query, filter);
                     break;
                 case "and":
                     searchResponse = esClient.searchWithOperatorAnd(query, filter);

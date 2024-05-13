@@ -90,16 +90,18 @@ public class EsClient {
         }
     }
 
-    // search without filter parameter
-    public SearchResponse search(String query) {
-        Query matchQuery = MatchQuery.of(q -> q.field("content").query(query))._toQuery();
-        return executeSearchQueryWithHighlight(matchQuery);
-    }
 
-    //  search with match_phrase02
-    public SearchResponse searchWithMatchPhrase(String query, String... filter) {
-        Query matchQuery = MatchPhraseQuery.of(q -> q.field("content").query(query))._toQuery();;
-        return executeSearchQuery(matchQuery);
+    // search without filters 
+    public SearchResponse searchWithoutFilters(String query) {
+        String queryWithoutMarks = query.substring(1, query.length() - 1);
+        if (queryWithoutMarks.startsWith("\"") && queryWithoutMarks.endsWith("\"")) {
+            String phrase = queryWithoutMarks.substring(1, queryWithoutMarks.length() - 1);
+            Query matchPhraseQuery = MatchPhraseQuery.of(q -> q.field("content").query(phrase))._toQuery();
+            return executeSearchQueryWithHighlight(matchPhraseQuery);
+        } else {
+            Query matchQuery = MatchQuery.of(q -> q.field("content").query(query))._toQuery();
+            return executeSearchQueryWithHighlight(matchQuery);
+        }
     }
 
     //  search with operator 'and'

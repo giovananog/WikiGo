@@ -5,12 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="454e7837-af94-49c1-aac6-bf1a6c617480" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/WikiGo.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/search/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/backend/search/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/search/src/main/java/com/elasticsearch/search/domain/EsClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/search/src/main/java/com/elasticsearch/search/domain/EsClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/search/target/classes/com/elasticsearch/search/domain/EsClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/search/target/classes/com/elasticsearch/search/domain/EsClient.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,7 +62,7 @@
       <updated>1715611013954</updated>
       <workItem from="1715611015717" duration="394000" />
       <workItem from="1715611430902" duration="29000" />
-      <workItem from="1715627120776" duration="200000" />
+      <workItem from="1715627120776" duration="901000" />
     </task>
     <servers />
   </component>
