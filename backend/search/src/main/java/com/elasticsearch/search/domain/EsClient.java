@@ -2,7 +2,10 @@ package com.elasticsearch.search.domain;
 
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.elasticsearch._types.query_dsl.*;
+import co.elastic.clients.elasticsearch.core.SearchRequest;
 import co.elastic.clients.elasticsearch.core.SearchResponse;
+import co.elastic.clients.elasticsearch.core.search.Highlight;
+import co.elastic.clients.elasticsearch.core.search.HighlightField;
 import co.elastic.clients.json.JsonData;
 import co.elastic.clients.json.jackson.JacksonJsonpMapper;
 import co.elastic.clients.transport.ElasticsearchTransport;
@@ -19,6 +22,7 @@ import org.elasticsearch.client.RestClient;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.util.Collections;
 
 @Component
 public class EsClient {
@@ -34,24 +38,24 @@ public class EsClient {
         String USER = "elastic";
         String PWD = "user123";
         credentialsProvider.setCredentials(AuthScope.ANY,
-            new UsernamePasswordCredentials(USER, PWD));
+                new UsernamePasswordCredentials(USER, PWD));
 
         SSLFactory sslFactory = SSLFactory.builder()
-            .withUnsafeTrustMaterial()
-            .withUnsafeHostnameVerifier()
-            .build();
+                .withUnsafeTrustMaterial()
+                .withUnsafeHostnameVerifier()
+                .build();
 
         RestClient restClient = RestClient.builder(
-                new HttpHost("localhost", 9200, "https"))
-            .setHttpClientConfigCallback((HttpAsyncClientBuilder httpClientBuilder) -> httpClientBuilder
-                .setDefaultCredentialsProvider(credentialsProvider)
-                .setSSLContext(sslFactory.getSslContext())
-                .setSSLHostnameVerifier(sslFactory.getHostnameVerifier())
-            ).build();
+                        new HttpHost("localhost", 9200, "https"))
+                .setHttpClientConfigCallback((HttpAsyncClientBuilder httpClientBuilder) -> httpClientBuilder
+                        .setDefaultCredentialsProvider(credentialsProvider)
+                        .setSSLContext(sslFactory.getSslContext())
+                        .setSSLHostnameVerifier(sslFactory.getHostnameVerifier())
+                ).build();
 
         ElasticsearchTransport transport = new RestClientTransport(
-            restClient,
-            new JacksonJsonpMapper()
+                restClient,
+                new JacksonJsonpMapper()
         );
 
         elasticsearchClient = new co.elastic.clients.elasticsearch.ElasticsearchClient(transport);
@@ -59,7 +63,7 @@ public class EsClient {
 
 
     // execute query without filters
-    private SearchResponse<ObjectNode> executeSearchQuery(Query finalMatchQuery) {
+    public SearchResponse<ObjectNode> executeSearchQuery(Query finalMatchQuery) {
         try {
             return elasticsearchClient.search(s -> s
                     .index("wikipedia").from(0).size(10000)
@@ -70,13 +74,29 @@ public class EsClient {
         }
     }
 
+    // execute query with highlight
+    public SearchResponse<ObjectNode> executeSearchQueryWithHighlight(Query finalMatchQuery) {
+        try {
+            HighlightField highlightField = HighlightField.of(f -> f.highlightQuery(finalMatchQuery));
+            Highlight highlight = Highlight.of(q -> q.fields("content", highlightField).numberOfFragments(1).fragmentSize(400).preTags("<strong>").postTags("</strong>"));
+
+            return elasticsearchClient.search(s -> s
+                    .index("wikipedia").from(0).size(10000)
+                    .query(finalMatchQuery)
+                    .highlight(highlight), ObjectNode.class
+            );
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     // search without filter parameter
     public SearchResponse search(String query) {
         Query matchQuery = MatchQuery.of(q -> q.field("content").query(query))._toQuery();
-        return executeSearchQuery(matchQuery);
+        return executeSearchQueryWithHighlight(matchQuery);
     }
 
-    //  search with match_phrase
+    //  search with match_phrase02
     public SearchResponse searchWithMatchPhrase(String query, String... filter) {
         Query matchQuery = MatchPhraseQuery.of(q -> q.field("content").query(query))._toQuery();;
         return executeSearchQuery(matchQuery);
@@ -111,4 +131,6 @@ public class EsClient {
         Query matchQuery = MatchQuery.of(q -> q.field("content").query(query).fuzziness(filter[1]))._toQuery();
         return executeSearchQuery(matchQuery);
     }
+
+
 }
