@@ -29,7 +29,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2024-05-06T13:51:28.020059780-03:00[America/Sao_Paulo]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2024-04-16T11:05:46.156344930-03:00[America/Sao_Paulo]")
 
 @Validated
 @Api(value = "search", description = "the search API")
@@ -40,23 +40,25 @@ public interface SearchApi {
     }
 
     /**
-     * GET /search : Submits a query to Elasticsearch
+     * GET /search : Submits a query to Elasticsearch with optional filter
      *
-     * @param query Query to be submitted (optional)
-     * @return OK (status code 200)
-     *         or Unexpected error (status code 500)
+     * @param query  Query to be submitted (optional)
+     * @param filter Filter to be applied (optional)
+     * @return OK (status code 200) or Unexpected error (status code 500)
      */
-    @ApiOperation(value = "Submits a query to Elasticsearch", nickname = "search", notes = "", response = Result.class, responseContainer = "List", tags={ "search", })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "OK", response = Result.class, responseContainer = "List"),
-        @ApiResponse(code = 500, message = "Unexpected error", response = Error.class) })
+    @ApiOperation(value = "Submits a query to Elasticsearch with optional filter", nickname = "search", notes = "", response = Result.class, responseContainer = "List", tags = {"search",})
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "OK", response = Result.class, responseContainer = "List"),
+            @ApiResponse(code = 500, message = "Unexpected error", response = Error.class)})
     @RequestMapping(value = "/search",
-        produces = { "application/json" }, 
-        method = RequestMethod.GET)
-    default CompletableFuture<ResponseEntity<List<Result>>> search(@ApiParam(value = "Query to be submitted") @Valid @RequestParam(value = "query", required = false) String query) {
-        return CompletableFuture.supplyAsync(()-> {
+            produces = {"application/json"},
+            method = RequestMethod.GET)
+    default CompletableFuture<ResponseEntity<List<Result>>> searchWithFilter(
+            @ApiParam(value = "Query to be submitted") @Valid @RequestParam(value = "query", required = false) String query,
+            @ApiParam(value = "Filter to be applied") @RequestParam(value = "filter", required = false) String... filter) {
+        return CompletableFuture.supplyAsync(() -> {
             getRequest().ifPresent(request -> {
-                for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
+                for (MediaType mediaType : MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                     if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
                         String exampleString = "{ \"abs\" : \"abs\", \"title\" : \"title\", \"url\" : \"url\" }";
                         ApiUtil.setExampleResponse(request, "application/json", exampleString);
@@ -66,7 +68,5 @@ public interface SearchApi {
             });
             return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
         }, Runnable::run);
-
     }
-
 }

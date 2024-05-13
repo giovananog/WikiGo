@@ -1,0 +1,502 @@
+Index: frontend_wikigo-main/frontend/src/Screens/Answers/Answers.css
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>.Central{\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n    align-items: center;\n    text-align: center;\n  }\n  \n  .widget{\n    display:grid;\n    justify-content: left;\n    align-items: center;\n    text-align: left;\n    margin-top: 20px;\n    margin-left: 20px;\n    margin-right: 80px;\n    margin-bottom: 20px;\n  }\n  \n  .logo{\n    width: 15em;\n    height: 15em;\n    margin-bottom: -75px;\n    margin-top: 160px;\n  }\n  \n  h1 {\n    font-family: \"Alegreya SC\", serif;\n    color: --var(text_color);\n    border: black;\n    font-size: 2.5em;\n  }\n  \n  .formSearch input{\n    background: var(--form_color);\n    border-radius: 40px;\n    width: 35em;\n    height: 3em;\n    margin-top: -10px;\n    text-align: left;\n    color: var(--text_color);\n    display: flex;\n    flex-grow: 1;\n    border: none;\n    outline: none;\n    white-space: nowrap;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    font-size: medium;\n    padding-left: 25px;\n  }\n  \n  .formWidget input{\n    background: var(--form_color);\n    border-radius: 40px;\n    width: 8em;\n    height: 1.5em;\n    margin-top: 5px;\n    text-align: left;\n    color: var(--text_color);\n    display: flex;\n    border: none;\n    outline: none;\n    white-space: nowrap;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    font-size: medium;\n    padding-left: 20px;\n  }\n  \n  .DarkModeButton{\n    display:flex;\n    justify-content: right;\n    align-items: center;\n    text-align: right;\n  }
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend_wikigo-main/frontend/src/Screens/Answers/Answers.css b/frontend_wikigo-main/frontend/src/Screens/Answers/Answers.css
+--- a/frontend_wikigo-main/frontend/src/Screens/Answers/Answers.css	
++++ b/frontend_wikigo-main/frontend/src/Screens/Answers/Answers.css	
+@@ -1,76 +1,123 @@
+-.Central{
+-    display: flex;
+-    flex-direction: column;
+-    justify-content: center;
+-    align-items: center;
+-    text-align: center;
+-  }
+-  
+-  .widget{
+-    display:grid;
+-    justify-content: left;
+-    align-items: center;
+-    text-align: left;
+-    margin-top: 20px;
+-    margin-left: 20px;
+-    margin-right: 80px;
+-    margin-bottom: 20px;
+-  }
+-  
+-  .logo{
+-    width: 15em;
+-    height: 15em;
+-    margin-bottom: -75px;
+-    margin-top: 160px;
+-  }
+-  
+-  h1 {
+-    font-family: "Alegreya SC", serif;
+-    color: --var(text_color);
+-    border: black;
+-    font-size: 2.5em;
+-  }
+-  
+-  .formSearch input{
+-    background: var(--form_color);
+-    border-radius: 40px;
+-    width: 35em;
+-    height: 3em;
+-    margin-top: -10px;
+-    text-align: left;
+-    color: var(--text_color);
+-    display: flex;
+-    flex-grow: 1;
+-    border: none;
+-    outline: none;
+-    white-space: nowrap;
+-    overflow: hidden;
+-    text-overflow: ellipsis;
+-    font-size: medium;
+-    padding-left: 25px;
+-  }
+-  
+-  .formWidget input{
+-    background: var(--form_color);
+-    border-radius: 40px;
+-    width: 8em;
+-    height: 1.5em;
+-    margin-top: 5px;
+-    text-align: left;
+-    color: var(--text_color);
+-    display: flex;
+-    border: none;
+-    outline: none;
+-    white-space: nowrap;
+-    overflow: hidden;
+-    text-overflow: ellipsis;
+-    font-size: medium;
+-    padding-left: 20px;
+-  }
+-  
+-  .DarkModeButton{
+-    display:flex;
+-    justify-content: right;
+-    align-items: center;
+-    text-align: right;
+-  }
+\ No newline at end of file
++.Geral {
++  display: flex;
++  flex-direction: column;
++  justify-content: center;
++  align-items: left;
++  text-align: left;
++  background: var(--Ansewer_background);
++}
++
++a:link {
++  text-decoration: none;
++  color: var(--link_color);
++ }
++ 
++ a:hover {
++  text-decoration: underline;
++ }
++
++.widget {
++  display: grid;
++  justify-content: left;
++  align-items: center;
++  text-align: left;
++  margin-top: 20px;
++  margin-left: 20px;
++  margin-right: 80px;
++  margin-bottom: 20px;
++}
++
++.logo_answer {
++  width: 150px;
++  height: 150px;
++  margin-right: 20px;
++  margin-top: -20px;
++  cursor: grab;
++}
++
++.Header {
++  background: var(--Header_background);
++  display: flex;
++  align-items: center;
++  justify-content: flex-start;
++  width: 100%;
++  padding: 5px;
++  position: relative;
++}
++
++
++h1 {
++  font-family: "Alegreya SC", serif;
++  color: --var(text_color);
++  border: black;
++  font-size: 2.5em;
++}
++
++.formSearch_ans input {
++  background: var(--form_color);
++  border-radius: 40px;
++  width: 35em;
++  height: 2.6em;
++  margin-top: -10px;
++  text-align: left;
++  color: var(--text_color);
++  display: flex;
++  flex-grow: 1;
++  border: none;
++  outline: none;
++  white-space: nowrap;
++  overflow: hidden;
++  text-overflow: ellipsis;
++  font-size: medium;
++  padding-left: 25px;
++}
++
++.formSearch_ans {
++  display: flex;
++  align-items: center;
++  margin-right: auto;
++}
++
++.formSubmit {
++  display: flex;
++  align-items: center;
++}
++
++.searchButton_ans {
++  align-items: center;
++  justify-content: center;
++  display: flex;
++  margin-left: 10px;
++}
++
++.DarkModeButton_ans {
++  display: flex;
++  justify-content: right;
++  align-items: center;
++  position: absolute;
++  right: 20px;
++  top: 10px;
++
++}
++
++.resultados{
++  padding-left: 20px;
++  padding-right: 350px;
++}
++
++.resultados{
++  padding-left: 20px;
++}
++
++.resultados h2{
++  margin-top: -20px;
++}
++.resultados h4{
++  margin-top: -20px;
++  font-weight: lighter;
++}
++
++.resultados p{
++  margin-top: 30px;
++  font-size: 0.9em;
++}
+Index: frontend_wikigo-main/frontend/src/Screens/Answers/Answers.jsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import React, { useState } from \"react\";\nimport DarkMode from \"../../components/DarkMode/DarkMode\";\nimport { useLocation } from \"react-router-dom\";\n\nfunction Answers() {\n  const location = useLocation();\n  const { results } = location.state;\n  const [visibleCount, setVisibleCount] = useState(4); // Inicialmente mostramos 4 itens\n\n  const loadMore = () => {\n    setVisibleCount(prevCount => prevCount + 4); // Carregar mais 4 itens a cada clique\n  };\n\n  return (\n    <div className=\"Geral\">\n      <div className=\"DarkModeButton\">\n        <DarkMode />\n      </div>\n      <h1>Search Results</h1>\n      {results.length > 0 ? (\n        <ul>\n          {results.slice(0, visibleCount).map((result, index) => (\n            <li key={index}>\n              <p><a href={result.url} target=\"_blank\" rel=\"noopener noreferrer\">{result.url}</a></p>\n              <h2><a href={result.url} target=\"_blank\" rel=\"noopener noreferrer\">{result.title}</a></h2>\n              <p>{result.abs}</p>\n            </li>\n          ))}\n        </ul>\n      ) : (\n        <p>Nenhum resultado encontrado.</p>\n      )}\n      {visibleCount < results.length && (\n        <button onClick={loadMore}>Mais Resultados</button>\n      )}\n    </div>\n  );\n}\n\nexport default Answers;\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend_wikigo-main/frontend/src/Screens/Answers/Answers.jsx b/frontend_wikigo-main/frontend/src/Screens/Answers/Answers.jsx
+--- a/frontend_wikigo-main/frontend/src/Screens/Answers/Answers.jsx	
++++ b/frontend_wikigo-main/frontend/src/Screens/Answers/Answers.jsx	
+@@ -1,38 +1,84 @@
+ import React, { useState } from "react";
++import axios from "axios";
+ import DarkMode from "../../components/DarkMode/DarkMode";
+-import { useLocation } from "react-router-dom";
++import { useLocation, useNavigate } from "react-router-dom";
++import wikiLogo from "../../assets/LOGO_NOVO.png";
++import "./Answers.css";
+ 
+ function Answers() {
+   const location = useLocation();
+-  const { results } = location.state;
+-  const [visibleCount, setVisibleCount] = useState(4); // Inicialmente mostramos 4 itens
++  const navigate = useNavigate();
++  const results = location.state ? location.state.results : [];
++  const initialSearchQuery = location.state ? location.state.searchQuery : "";
++  const [searchQuery, setSearchQuery] = useState(initialSearchQuery);
++  const [visibleCount, setVisibleCount] = useState(7);
++
++  const fetchResults = async (searchQuery) => {
++    try {
++      const url = `http://localhost:8080/v1/search?query=${encodeURIComponent(searchQuery)}`;
++      const response = await axios.get(url);
++      return response.data;
++    } catch (error) {
++      console.error("Error fetching search results:", error);
++      return [];
++    }
++  };
++
++  const handleSearchSubmit = async (e) => {
++    e.preventDefault();
++    const results = await fetchResults(searchQuery);
++    navigate('/answers', { state: { results, searchQuery } });
++  };
+ 
+   const loadMore = () => {
+-    setVisibleCount(prevCount => prevCount + 4); // Carregar mais 4 itens a cada clique
++    setVisibleCount(prevCount => prevCount + 4);
++  };
++
++  const goToHomePage = () => {
++    navigate('/');
+   };
+ 
+   return (
+     <div className="Geral">
+-      <div className="DarkModeButton">
+-        <DarkMode />
++      <div className="Header">
++        <img src={wikiLogo} className="logo_answer" alt="WikiGO" onClick={goToHomePage} />
++        <div className="formSearch_ans">
++          <form className="formSubmit" onSubmit={handleSearchSubmit}>
++            <input
++              type="text"
++              name="search"
++              value={searchQuery}
++              onChange={(e) => setSearchQuery(e.target.value)}
++            />
++            <button type="submit" className="searchButton_ans">Search</button>
++          </form>
++        </div>
++        <div className="DarkModeButton_ans">
++          <DarkMode />
++        </div>
+       </div>
+-      <h1>Search Results</h1>
+-      {results.length > 0 ? (
+-        <ul>
+-          {results.slice(0, visibleCount).map((result, index) => (
+-            <li key={index}>
+-              <p><a href={result.url} target="_blank" rel="noopener noreferrer">{result.url}</a></p>
+-              <h2><a href={result.url} target="_blank" rel="noopener noreferrer">{result.title}</a></h2>
+-              <p>{result.abs}</p>
+-            </li>
+-          ))}
+-        </ul>
+-      ) : (
+-        <p>Nenhum resultado encontrado.</p>
+-      )}
+-      {visibleCount < results.length && (
+-        <button onClick={loadMore}>Mais Resultados</button>
+-      )}
++      <div className="resultados">
++      {
++        results.length > 0 ? (
++          <ul>
++            {results.slice(0, visibleCount).map((result, index) => (
++              <li key={index}>
++                <p><a href={result.url} target="_blank" rel="noopener noreferrer">{result.url}</a></p>
++                <h2><a href={result.url} target="_blank" rel="noopener noreferrer">{result.title}</a></h2>
++                <h4>{result.abs}</h4>
++              </li>
++            ))}
++          </ul>
++        ) : (
++          <p>Nenhum resultado encontrado.</p>
++        )
++      }
++      {
++        visibleCount < results.length && (
++          <button onClick={loadMore}>Mais Resultados</button>
++        )
++      }
++      </div>
+     </div>
+   );
+ }
+Index: frontend_wikigo-main/frontend/src/Screens/Inicial/Inicial.jsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import { useState } from \"react\";\nimport wikiLogo from \"/LOGO_NOVO.png\";\nimport \"./Inicial.css\";\nimport WeatherWidget from \"../../components/weather\";\nimport axios from \"axios\";\nimport DarkMode from \"../../components/DarkMode/DarkMode\";\nimport { useNavigate } from \"react-router-dom\";\n\nfunction Inicial() {\n  const [inputValueLocation, setInputValueLocation] = useState(\"Alfenas\");\n  const [location, setLocation] = useState(\"Alfenas\");\n  const [searchQuery, setSearchQuery] = useState(\"\");\n  const [searchResults, setSearchResults] = useState([]);\n  const navigate = useNavigate();\n\n  const fetchResults = async (searchQuery) => {\n    try {\n      const url = `http://localhost:8080/v1/search?query=${encodeURIComponent(\n        searchQuery\n      )}`;\n      const response = await axios.get(url);\n      return response.data;\n    } catch (error) {\n      console.error(\"Error fetching search results:\", error);\n      return [];\n    }\n  };\n\n  const hadleSubmitLocation = (e) => {\n    e.preventDefault();\n    setLocation(inputValueLocation);\n  };\n\n  const handleSearchSubmit = async (e) => {\n    e.preventDefault();\n    const results = await fetchResults(searchQuery);\n    setSearchResults(results);\n    console.log(results);\n    navigate('/answers', { state: { results } }); \n  };\n\n  return (\n    <div className=\"App\">\n      <div className=\"DarkModeButton\">\n        <DarkMode />\n      </div>\n      <div className=\"Central\">\n        <div>\n          <img src={wikiLogo} className=\"logo\" alt=\"WikiGO\" />\n        </div>\n        <h1>WIKI GO</h1>\n\n        <div className=\"formSearch\">\n          <form onSubmit={handleSearchSubmit}>\n            <input\n              type=\"text\"\n              name=\"search\"\n              value={searchQuery}\n              onChange={(e) => setSearchQuery(e.target.value)}\n            />\n            <button type=\"submit\">Search</button>\n          </form>\n        </div>\n      </div>\n\n      <div className=\"widget\">\n        <WeatherWidget location={location} />\n        <form className=\"formWidget\" onSubmit={hadleSubmitLocation}>\n          <input\n            type=\"text\"\n            value={inputValueLocation}\n            onChange={(e) => setInputValueLocation(e.target.value)}\n          />\n          <button type=\"submit\">Change Location</button>\n        </form>\n      </div>\n    </div>\n  );\n}\n\nexport default Inicial;\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend_wikigo-main/frontend/src/Screens/Inicial/Inicial.jsx b/frontend_wikigo-main/frontend/src/Screens/Inicial/Inicial.jsx
+--- a/frontend_wikigo-main/frontend/src/Screens/Inicial/Inicial.jsx	
++++ b/frontend_wikigo-main/frontend/src/Screens/Inicial/Inicial.jsx	
+@@ -1,10 +1,10 @@
+-import { useState } from "react";
+-import wikiLogo from "/LOGO_NOVO.png";
+-import "./Inicial.css";
+-import WeatherWidget from "../../components/weather";
++import React, { useState } from "react";
+ import axios from "axios";
++import WeatherWidget from "../../components/weather";
+ import DarkMode from "../../components/DarkMode/DarkMode";
+ import { useNavigate } from "react-router-dom";
++import wikiLogo from "/LOGO_NOVO.png";
++import "./Inicial.css";
+ 
+ function Inicial() {
+   const [inputValueLocation, setInputValueLocation] = useState("Alfenas");
+@@ -15,9 +15,7 @@
+ 
+   const fetchResults = async (searchQuery) => {
+     try {
+-      const url = `http://localhost:8080/v1/search?query=${encodeURIComponent(
+-        searchQuery
+-      )}`;
++      const url = `http://localhost:8080/v1/search?query=${encodeURIComponent(searchQuery)}`;
+       const response = await axios.get(url);
+       return response.data;
+     } catch (error) {
+@@ -34,9 +32,7 @@
+   const handleSearchSubmit = async (e) => {
+     e.preventDefault();
+     const results = await fetchResults(searchQuery);
+-    setSearchResults(results);
+-    console.log(results);
+-    navigate('/answers', { state: { results } }); 
++    navigate('/answers', { state: { results, searchQuery } });
+   };
+ 
+   return (
+@@ -45,11 +41,8 @@
+         <DarkMode />
+       </div>
+       <div className="Central">
+-        <div>
+-          <img src={wikiLogo} className="logo" alt="WikiGO" />
+-        </div>
++        <img src={wikiLogo} className="logo" alt="WikiGO" />
+         <h1>WIKI GO</h1>
+-
+         <div className="formSearch">
+           <form onSubmit={handleSearchSubmit}>
+             <input
+@@ -58,11 +51,10 @@
+               value={searchQuery}
+               onChange={(e) => setSearchQuery(e.target.value)}
+             />
+-            <button type="submit">Search</button>
++            <button className="searchButton" type="submit">Search</button>
+           </form>
+         </div>
+       </div>
+-
+       <div className="widget">
+         <WeatherWidget location={location} />
+         <form className="formWidget" onSubmit={hadleSubmitLocation}>
+Index: frontend_wikigo-main/frontend/src/Screens/Inicial/Inicial.css
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>.Central{\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n    align-items: center;\n    text-align: center;\n  }\n  \n  .widget{\n    display:grid;\n    justify-content: left;\n    align-items: center;\n    text-align: left;\n    margin-top: 20px;\n    margin-left: 20px;\n    margin-right: 80px;\n    margin-bottom: 20px;\n  }\n  \n  .logo{\n    width: 15em;\n    height: 15em;\n    margin-bottom: -75px;\n    margin-top: 160px;\n  }\n  \n  h1 {\n    font-family: \"Alegreya SC\", serif;\n    color: --var(text_color);\n    border: black;\n    font-size: 2.5em;\n  }\n  \n  .formSearch input{\n    background: var(--form_color);\n    border-radius: 40px;\n    width: 35em;\n    height: 3em;\n    margin-top: -10px;\n    text-align: left;\n    color: var(--text_color);\n    display: flex;\n    flex-grow: 1;\n    border: none;\n    outline: none;\n    white-space: nowrap;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    font-size: medium;\n    padding-left: 25px;\n  }\n  \n  .formWidget input{\n    background: var(--form_color);\n    border-radius: 40px;\n    width: 8em;\n    height: 1.5em;\n    margin-top: 5px;\n    text-align: left;\n    color: var(--text_color);\n    display: flex;\n    border: none;\n    outline: none;\n    white-space: nowrap;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    font-size: medium;\n    padding-left: 20px;\n  }\n  \n  .DarkModeButton{\n    display:flex;\n    justify-content: right;\n    align-items: center;\n    text-align: right;\n  }
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend_wikigo-main/frontend/src/Screens/Inicial/Inicial.css b/frontend_wikigo-main/frontend/src/Screens/Inicial/Inicial.css
+--- a/frontend_wikigo-main/frontend/src/Screens/Inicial/Inicial.css	
++++ b/frontend_wikigo-main/frontend/src/Screens/Inicial/Inicial.css	
+@@ -1,3 +1,8 @@
++.App {
++  position: relative;
++  min-height: 100vh; 
++}
++
+ .Central{
+     display: flex;
+     flex-direction: column;
+@@ -6,16 +11,15 @@
+     text-align: center;
+   }
+   
+-  .widget{
+-    display:grid;
+-    justify-content: left;
+-    align-items: center;
+-    text-align: left;
+-    margin-top: 20px;
+-    margin-left: 20px;
+-    margin-right: 80px;
+-    margin-bottom: 20px;
++  .widget {
++    position: fixed;
++    left: 20px;
++    bottom: 20px;
++    display: flex;
++    flex-direction: column;
++    align-items: flex-start;
+   }
++  
+   
+   .logo{
+     width: 15em;
+@@ -49,6 +53,19 @@
+     font-size: medium;
+     padding-left: 25px;
+   }
++
++  .formSearch{
++    display: flex;
++    align-items: center;
++    justify-content: center;
++  }
++
++  .searchButton {
++    align-items: center;
++    justify-content: center;
++    display: flex;
++    margin-left: 10px;
++  }
+   
+   .formWidget input{
+     background: var(--form_color);
+Index: frontend_wikigo-main/frontend/src/index.css
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>:root {\n  --body_background: rgb(243, 216, 182);\n  --body_color: black;\n  --link_color: navy;\n  --text_color: black;\n  --form_color: rgb(255, 255, 255);\n  \n}\n\n[data-theme=\"dark\"] {\n  --body_background: #111111;\n  --body_color: white;\n  --link_color: lightblue;\n  --text_color: white;\n  --form_color: #333333;\n}\n\n*{\n  transition: all 0.3s ease-in-out;\n}\n\nhtml, body {\n  height: 100%;\n}\n\nbody {\n  font-family: \"Alegreya SC\", serif;\n  margin: 0;\n  padding: 0;\n  background: var(--body_background);\n  color: var(--body_color);\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend_wikigo-main/frontend/src/index.css b/frontend_wikigo-main/frontend/src/index.css
+--- a/frontend_wikigo-main/frontend/src/index.css	
++++ b/frontend_wikigo-main/frontend/src/index.css	
+@@ -1,18 +1,22 @@
+ :root {
+   --body_background: rgb(243, 216, 182);
+   --body_color: black;
+-  --link_color: navy;
++  --link_color: black;
+   --text_color: black;
+   --form_color: rgb(255, 255, 255);
+-  
++  --Header_background: rgb(243, 216, 182);
++  --Ansewer_background: rgb(242, 245, 196);
+ }
+ 
+ [data-theme="dark"] {
+   --body_background: #111111;
+   --body_color: white;
+-  --link_color: lightblue;
++  --link_color: white;
+   --text_color: white;
+   --form_color: #333333;
++  --Header_background: #111111;
++  --Ansewer_background: #222222;
++
+ }
+ 
+ *{

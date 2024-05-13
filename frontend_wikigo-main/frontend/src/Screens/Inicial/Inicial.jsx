@@ -1,10 +1,10 @@
-import { useState } from "react";
-import wikiLogo from "/LOGO_NOVO.png";
-import "./Inicial.css";
-import WeatherWidget from "../../components/weather";
+import React, { useState } from "react";
 import axios from "axios";
+import WeatherWidget from "../../components/weather";
 import DarkMode from "../../components/DarkMode/DarkMode";
 import { useNavigate } from "react-router-dom";
+import wikiLogo from "/LOGO_NOVO.png";
+import "./Inicial.css";
 
 function Inicial() {
   const [inputValueLocation, setInputValueLocation] = useState("Alfenas");
@@ -15,9 +15,7 @@ function Inicial() {
 
   const fetchResults = async (searchQuery) => {
     try {
-      const url = `http://localhost:8080/v1/search?query=${encodeURIComponent(
-        searchQuery
-      )}`;
+      const url = `http://localhost:8080/v1/search?query=${encodeURIComponent(searchQuery)}`;
       const response = await axios.get(url);
       return response.data;
     } catch (error) {
@@ -34,9 +32,7 @@ function Inicial() {
   const handleSearchSubmit = async (e) => {
     e.preventDefault();
     const results = await fetchResults(searchQuery);
-    setSearchResults(results);
-    console.log(results);
-    navigate('/answers', { state: { results } }); 
+    navigate('/answers', { state: { results, searchQuery } });
   };
 
   return (
@@ -45,11 +41,8 @@ function Inicial() {
         <DarkMode />
       </div>
       <div className="Central">
-        <div>
-          <img src={wikiLogo} className="logo" alt="WikiGO" />
-        </div>
+        <img src={wikiLogo} className="logo" alt="WikiGO" />
         <h1>WIKI GO</h1>
-
         <div className="formSearch">
           <form onSubmit={handleSearchSubmit}>
             <input
@@ -58,11 +51,10 @@ function Inicial() {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
-            <button type="submit">Search</button>
+            <button className="searchButton" type="submit">Search</button>
           </form>
         </div>
       </div>
-
       <div className="widget">
         <WeatherWidget location={location} />
         <form className="formWidget" onSubmit={hadleSubmitLocation}>

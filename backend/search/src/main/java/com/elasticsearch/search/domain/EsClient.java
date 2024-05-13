@@ -1,9 +1,9 @@
 package com.elasticsearch.search.domain;
 
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
-import co.elastic.clients.elasticsearch._types.query_dsl.MatchQuery;
-import co.elastic.clients.elasticsearch._types.query_dsl.Query;
+import co.elastic.clients.elasticsearch._types.query_dsl.*;
 import co.elastic.clients.elasticsearch.core.SearchResponse;
+import co.elastic.clients.json.JsonData;
 import co.elastic.clients.json.jackson.JacksonJsonpMapper;
 import co.elastic.clients.transport.ElasticsearchTransport;
 import co.elastic.clients.transport.rest_client.RestClientTransport;
@@ -57,19 +57,58 @@ public class EsClient {
         elasticsearchClient = new co.elastic.clients.elasticsearch.ElasticsearchClient(transport);
     }
 
-    public SearchResponse search(String query) {
-        Query matchQuery = MatchQuery.of(q -> q.field("content").query(query))._toQuery();
 
-        SearchResponse<ObjectNode> response;
+    // execute query without filters
+    private SearchResponse<ObjectNode> executeSearchQuery(Query finalMatchQuery) {
         try {
-            response = elasticsearchClient.search(s -> s
-                .index("wikipedia").from(0).size(10)
-                .query(matchQuery), ObjectNode.class
+            return elasticsearchClient.search(s -> s
+                    .index("wikipedia").from(0).size(10000)
+                    .query(finalMatchQuery), ObjectNode.class
             );
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
 
-        return response;
+    // search without filter parameter
+    public SearchResponse search(String query) {
+        Query matchQuery = MatchQuery.of(q -> q.field("content").query(query))._toQuery();
+        return executeSearchQuery(matchQuery);
+    }
+
+    //  search with match_phrase
+    public SearchResponse searchWithMatchPhrase(String query, String... filter) {
+        Query matchQuery = MatchPhraseQuery.of(q -> q.field("content").query(query))._toQuery();;
+        return executeSearchQuery(matchQuery);
+    }
+
+    //  search with operator 'and'
+    public SearchResponse searchWithOperatorAnd(String query, String... filter) {
+        Query matchQuery = MatchPhraseQuery.of(q -> q.field("content").query(query))._toQuery();
+        return executeSearchQuery(matchQuery);
+    }
+
+    //  search with boolQuery 'mustNot'
+    public SearchResponse searchWithMustNot(String query, String... filter) {
+        Query matchQuery = BoolQuery.of(q -> q.should(MatchQuery.of(l -> l.field("content").query(query))._toQuery()).mustNot(MatchQuery.of(l -> l.field("content").query(filter[1]))._toQuery()))._toQuery();
+        return executeSearchQuery(matchQuery);
+    }
+
+    //  search with dt_creation (range)
+    public SearchResponse searchWithDtCreation(String query, String... filter) {
+        Query matchQuery = BoolQuery.of(q -> q.should(MatchQuery.of(l -> l.field("content").query(query))._toQuery()).filter(RangeQuery.of(l -> l.field("dt_creation").lt(JsonData.of(filter[1])))._toQuery()))._toQuery();
+        return executeSearchQuery(matchQuery);
+    }
+
+    //  search with reading_time (range)
+    public SearchResponse searchWithReadingTime(String query, String... filter) {
+        Query matchQuery = BoolQuery.of(q -> q.should(MatchQuery.of(l -> l.field("content").query(query))._toQuery()).filter(RangeQuery.of(l -> l.field("reading_time").lt(JsonData.of(filter[1])))._toQuery()))._toQuery();
+        return executeSearchQuery(matchQuery);
+    }
+
+    //  search with fuzziness
+    public SearchResponse searchWithFuzziness(String query, String... filter) {
+        Query matchQuery = MatchQuery.of(q -> q.field("content").query(query).fuzziness(filter[1]))._toQuery();
+        return executeSearchQuery(matchQuery);
     }
 }

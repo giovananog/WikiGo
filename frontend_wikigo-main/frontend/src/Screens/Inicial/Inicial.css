@@ -1,3 +1,8 @@
+.App {
+  position: relative;
+  min-height: 100vh; 
+}
+
 .Central{
     display: flex;
     flex-direction: column;
@@ -6,16 +11,15 @@
     text-align: center;
   }
   
-  .widget{
-    display:grid;
-    justify-content: left;
-    align-items: center;
-    text-align: left;
-    margin-top: 20px;
-    margin-left: 20px;
-    margin-right: 80px;
-    margin-bottom: 20px;
+  .widget {
+    position: fixed;
+    left: 20px;
+    bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
   }
+  
   
   .logo{
     width: 15em;
@@ -48,6 +52,19 @@
     text-overflow: ellipsis;
     font-size: medium;
     padding-left: 25px;
+  }
+
+  .formSearch{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .searchButton {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    margin-left: 10px;
   }
   
   .formWidget input{
