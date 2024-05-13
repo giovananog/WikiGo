@@ -1,18 +1,22 @@
 :root {
   --body_background: rgb(243, 216, 182);
   --body_color: black;
-  --link_color: navy;
+  --link_color: black;
   --text_color: black;
   --form_color: rgb(255, 255, 255);
-  
+  --Header_background: rgb(243, 216, 182);
+  --Ansewer_background: rgb(242, 245, 196);
 }
 
 [data-theme="dark"] {
   --body_background: #111111;
   --body_color: white;
-  --link_color: lightblue;
+  --link_color: white;
   --text_color: white;
   --form_color: #333333;
+  --Header_background: #111111;
+  --Ansewer_background: #222222;
+
 }
 
 *{
