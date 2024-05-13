@@ -1,6 +1,9 @@
 package com.elasticsearch.search.domain;
 
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
+import co.elastic.clients.elasticsearch._types.FieldSort;
+import co.elastic.clients.elasticsearch._types.SortOptions;
+import co.elastic.clients.elasticsearch._types.SortOrder;
 import co.elastic.clients.elasticsearch._types.query_dsl.*;
 import co.elastic.clients.elasticsearch.core.SearchRequest;
 import co.elastic.clients.elasticsearch.core.SearchResponse;
@@ -23,6 +26,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.util.Collections;
+import java.util.List;
 
 @Component
 public class EsClient {
@@ -90,6 +94,20 @@ public class EsClient {
         }
     }
 
+    // execute query with sort field
+    public SearchResponse<ObjectNode> executeSearchQueryWithSortField(Query finalMatchQuery) {
+        try {
+            return elasticsearchClient.search(s -> s
+                    .index("wikipedia").from(0).size(10000)
+                    .query(finalMatchQuery)
+                    .sort(SortOptions.of(q -> q.field(FieldSort.of(n -> n.field("reading_time").order(SortOrder.Asc))))), ObjectNode.class
+            );
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
 
     // search without filters
     public SearchResponse searchWithoutFilters(String query) {
@@ -100,7 +118,7 @@ public class EsClient {
             return executeSearchQueryWithHighlight(matchPhraseQuery);
         } else {
             Query matchQuery = MatchQuery.of(q -> q.field("content").query(query))._toQuery();
-            return executeSearchQueryWithHighlight(matchQuery);
+            return executeSearchQuery(matchQuery);
         }
     }
 
