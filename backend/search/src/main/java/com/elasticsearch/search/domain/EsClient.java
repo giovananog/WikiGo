@@ -91,7 +91,7 @@ public class EsClient {
     }
 
 
-    // search without filters 
+    // search without filters
     public SearchResponse searchWithoutFilters(String query) {
         String queryWithoutMarks = query.substring(1, query.length() - 1);
         if (queryWithoutMarks.startsWith("\"") && queryWithoutMarks.endsWith("\"")) {
