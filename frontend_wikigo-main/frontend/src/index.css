@@ -1,11 +1,14 @@
 :root {
-  --body_background: rgb(243, 216, 182);
+  --body_background: rgb(255, 255, 255);
   --body_color: black;
-  --link_color: black;
+  --link_color: #1a0dab;
   --text_color: black;
   --form_color: rgb(255, 255, 255);
-  --Header_background: rgb(243, 216, 182);
-  --Ansewer_background: rgb(242, 245, 196);
+  --Header_background: rgb(255, 255, 255);
+  --Ansewer_background: #fff;
+  --mais_resultados_background: #fff;
+  --border_color: #afadad;
+  --icon-color: black;
 }
 
 [data-theme="dark"] {
@@ -16,6 +19,9 @@
   --form_color: #333333;
   --Header_background: #111111;
   --Ansewer_background: #222222;
+  --mais_resultados_background: rgb(255,255,255,0.18);
+  --border_color: #111111;
+  --icon-color: white;
 
 }
 

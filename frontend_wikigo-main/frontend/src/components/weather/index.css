@@ -38,6 +38,17 @@
   }
 }
 
+.weather{
+  font-size: medium;
+  text-transform: uppercase;
+  padding-bottom: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  
+}
+
 .cloud {
   fill: lightblue;
   filter: drop-shadow(0 0 10px rgba(173, 216, 230, 0.8));
@@ -56,7 +67,7 @@
 .temperature {
   font-size: 1.6rem; /* Reduzido de 1.8rem para 1.6rem */
   font-weight: bold;
-  margin-top: 10px; /* Reduzido de 12px para 10px */
+  margin-top: 13px; /* Reduzido de 12px para 10px */
 }
 
 .feels-like {

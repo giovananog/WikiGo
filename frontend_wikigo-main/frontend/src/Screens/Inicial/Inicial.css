@@ -1,93 +1,136 @@
 .App {
   position: relative;
-  min-height: 100vh; 
+  min-height: 100vh;
 }
 
-.Central{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-  }
-  
-  .widget {
-    position: fixed;
-    left: 20px;
-    bottom: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  
-  
-  .logo{
-    width: 15em;
-    height: 15em;
-    margin-bottom: -75px;
-    margin-top: 160px;
-  }
-  
-  h1 {
-    font-family: "Alegreya SC", serif;
-    color: --var(text_color);
-    border: black;
-    font-size: 2.5em;
-  }
-  
-  .formSearch input{
-    background: var(--form_color);
-    border-radius: 40px;
-    width: 35em;
-    height: 3em;
-    margin-top: -10px;
-    text-align: left;
-    color: var(--text_color);
-    display: flex;
-    flex-grow: 1;
-    border: none;
-    outline: none;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    font-size: medium;
-    padding-left: 25px;
-  }
+.Central {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
 
-  .formSearch{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+.widget {
+  position: fixed;
+  left: 20px;
+  bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
 
-  .searchButton {
-    align-items: center;
-    justify-content: center;
-    display: flex;
-    margin-left: 10px;
-  }
-  
-  .formWidget input{
-    background: var(--form_color);
-    border-radius: 40px;
-    width: 8em;
-    height: 1.5em;
-    margin-top: 5px;
-    text-align: left;
-    color: var(--text_color);
-    display: flex;
-    border: none;
-    outline: none;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    font-size: medium;
-    padding-left: 20px;
-  }
-  
-  .DarkModeButton{
-    display:flex;
-    justify-content: right;
-    align-items: center;
-    text-align: right;
-  }
+.logo {
+  width: 15em;
+  height: 15em;
+  margin-bottom: -75px;
+  margin-top: 160px;
+}
+
+h1 {
+  font-family: "Alegreya SC", serif;
+  color: var(--text_color);
+  border: black;
+  font-size: 2.5em;
+}
+
+.formSearch {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.formSearch .input-container {
+  position: relative;
+  width: 35em;
+}
+
+.formSearch input {
+  background: var(--form_color);
+  border-radius: 40px;
+  width: 95%;
+  height: 3em;
+  text-align: left;
+  color: var(--text_color);
+  border: none;
+  outline: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: medium;
+  padding-left: 25px;
+  border: 2px solid;
+  border-color: var(--border_color);
+}
+
+.formSearch .searchButton {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1em;
+  padding: 0.5em 1em;
+  border-radius: 20px;
+  background-color: var(--button_color);
+  color: var(--button_text_color);
+}
+
+.formSearch .searchButton img {
+  width: 1.5em;
+  height: auto;
+  filter: var(--icon-filter);
+}
+
+.formWidget .input-container {
+  position: relative;
+  width: 10em;
+}
+
+.formWidget input {
+  background: var(--form_color);
+  border-radius: 40px;
+  width: 90%;
+  height: 2em;
+  text-align: left;
+  color: var(--text_color);
+  border: none;
+  outline: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: medium;
+  padding-left: 13px;
+  border: 2px solid;
+  border-color: var(--border_color);
+}
+
+.formWidget .locationButton {
+  position: absolute;
+  text-align: left;
+  right: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 0.8em;
+  border-radius: 20px;
+  background-color: var(--button_color);
+  color: var(--button_text_color);
+  filter: var(--icon-filter);
+}
+
+.DarkModeButton {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  text-align: right;
+  width: 100%;
+}
+
+.icon {
+  fill: var(--icon-color);
+}

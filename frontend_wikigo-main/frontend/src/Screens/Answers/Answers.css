@@ -2,30 +2,21 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: left;
-  text-align: left;
-  background: var(--Ansewer_background);
-}
-
-a:link {
-  text-decoration: none;
-  color: var(--link_color);
- }
- 
- a:hover {
-  text-decoration: underline;
- }
-
-.widget {
-  display: grid;
-  justify-content: left;
   align-items: center;
   text-align: left;
-  margin-top: 20px;
-  margin-left: 20px;
-  margin-right: 80px;
-  margin-bottom: 20px;
+  background: var(--Ansewer_background);
+  overflow-x: hidden;
 }
+
+a:link{
+  text-decoration: none;
+  color: var(--link_color);
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
 
 .logo_answer {
   width: 150px;
@@ -43,6 +34,8 @@ a:link {
   width: 100%;
   padding: 5px;
   position: relative;
+  border: 2px solid;
+  border-color: var(--border_color);
 }
 
 
@@ -56,7 +49,7 @@ h1 {
 .formSearch_ans input {
   background: var(--form_color);
   border-radius: 40px;
-  width: 35em;
+  width: 34em;
   height: 2.6em;
   margin-top: -10px;
   text-align: left;
@@ -70,12 +63,40 @@ h1 {
   text-overflow: ellipsis;
   font-size: medium;
   padding-left: 25px;
+  border: 2px solid;
+  border-color: var(--border_color);
 }
 
 .formSearch_ans {
   display: flex;
   align-items: center;
   margin-right: auto;
+}
+
+.formSearch_ans .input-container_ans {
+  position: relative;
+  width: 35em;
+}
+
+.formSearch_ans .searchButton_ans {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1em;
+  padding-bottom: 0.5em;
+  border-radius: 20px;
+  background-color: var(--button_color);
+  color: var(--button_text_color);
+}
+
+.formSearch_ans .searchButton_ans img {
+  width: 1.5em;
+  height: auto;
+  filter: var(--icon-filter);
 }
 
 .formSubmit {
@@ -100,24 +121,49 @@ h1 {
 
 }
 
-.resultados{
+.resultados {
   padding-left: 20px;
   padding-right: 350px;
 }
 
-.resultados{
-  padding-left: 20px;
-}
-
-.resultados h2{
+.resultados h2 {
   margin-top: -20px;
 }
-.resultados h4{
+
+.resultados h4 {
+  font-family: "Rubik", sans-serif;
   margin-top: -20px;
   font-weight: lighter;
 }
 
-.resultados p{
+.resultados p {
   margin-top: 30px;
   font-size: 0.9em;
+}
+
+.mais_resultados {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  padding-bottom: 20px;
+}
+
+.mais_resultados button {
+  border-radius: 20px;
+  width: 200px;
+  height: 40px;
+  background-color: var(--mais_resultados_background);
+  color: var(--text_color);
+  font-size: medium;
+  font-weight: 700;
+  border: 2px solid;
+  border-color: var(--border_color);
+}
+
+.date{
+  font-size: 0.8em;
+  justify-content: left;
+  align-items: left;
+  display: flex;
+  padding-right: 90%;
 }

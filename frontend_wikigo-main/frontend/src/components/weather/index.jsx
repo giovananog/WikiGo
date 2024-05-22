@@ -17,7 +17,7 @@ const WeatherWidget = ({ location }) => {
         .get(
           `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${
             import.meta.env.VITE_WEATHER_API_KEY
-          }&units=metric`
+          }&units=metric&lang=pt_br`
         )
 
         .then((response) => {
@@ -50,7 +50,7 @@ const WeatherWidget = ({ location }) => {
         {cloudSize > 50 && <img src={CloudSvg} className="cloud" alt="Cloud" />}
       </div>
       <div className="temperature">{Math.round(weatherData.main.temp)}°</div>
-      <div className="weather">{weatherData.weather[0].main}</div>
+      <div className="weather">{weatherData.weather[0].description}</div>
       <div className="low-high">
         {Math.round(weatherData.main.temp_min)}° /{" "}
         {Math.round(weatherData.main.temp_max)}°
