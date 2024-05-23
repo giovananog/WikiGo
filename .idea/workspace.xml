@@ -5,14 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="454e7837-af94-49c1-aac6-bf1a6c617480" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_13_05_2024_11_42_[Changes]1/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_13_05_2024_11_42__Changes_1.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/search/src/main/java/com/elasticsearch/search/domain/EsClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/search/src/main/java/com/elasticsearch/search/domain/EsClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/search/src/main/java/com/elasticsearch/search/service/SearchService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/search/src/main/java/com/elasticsearch/search/service/SearchService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend_wikigo-main/node_modules/.package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend_wikigo-main/node_modules/.package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend_wikigo-main/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend_wikigo-main/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend_wikigo-main/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend_wikigo-main/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/search/target/classes/com/elasticsearch/search/domain/EsClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/search/target/classes/com/elasticsearch/search/domain/EsClient.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,7 +70,7 @@
       <workItem from="1715611430902" duration="29000" />
       <workItem from="1715627120776" duration="4643000" />
       <workItem from="1716470460002" duration="529000" />
-      <workItem from="1716471041799" duration="196000" />
+      <workItem from="1716471041799" duration="2494000" />
     </task>
     <servers />
   </component>

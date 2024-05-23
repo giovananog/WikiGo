@@ -66,20 +66,6 @@ public class EsClient {
         elasticsearchClient = new co.elastic.clients.elasticsearch.ElasticsearchClient(transport);
     }
 
-
-
-    public SearchResponse<ObjectNode> executeSearchQueryWithPagination(Query finalMatchQuery, int from, int size) {
-        try {
-            return elasticsearchClient.search(s -> s
-                    .index("wikipedia")
-                    .from(from)
-                    .size(size)
-                    .query(finalMatchQuery), ObjectNode.class);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     // execute query with highlight
     public SearchResponse<ObjectNode> executeSearchQuery(Query finalMatchQuery) {
         try {
@@ -147,7 +133,7 @@ public class EsClient {
 
     //  search with boolQuery 'mustNot'
     public SearchResponse searchWithMustNot(String query, String... filter) {
-        Query matchQuery = BoolQuery.of(q -> q.should(MatchQuery.of(l -> l.field("content").query(query))._toQuery()).mustNot(MatchQuery.of(l -> l.field("content").query(filter[1]))._toQuery()))._toQuery();
+        Query matchQuery = BoolQuery.of(q -> q.should(MatchQuery.of(l -> l.field("content").query(query))._toQuery()).mustNot(MatchQuery.of(l -> l.field("content").query(filter[0]))._toQuery()))._toQuery();
         return executeSearchQuery(matchQuery);
     }
 
