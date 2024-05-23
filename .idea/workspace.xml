@@ -5,9 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="454e7837-af94-49c1-aac6-bf1a6c617480" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_13_05_2024_11_42_[Changes]1/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_13_05_2024_11_42__Changes_1.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/search/src/main/java/com/elasticsearch/search/domain/EsClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/search/src/main/java/com/elasticsearch/search/domain/EsClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/search/target/classes/com/elasticsearch/search/domain/EsClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/search/target/classes/com/elasticsearch/search/domain/EsClient.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/search/src/main/java/com/elasticsearch/search/service/SearchService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/search/src/main/java/com/elasticsearch/search/service/SearchService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend_wikigo-main/node_modules/.package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend_wikigo-main/node_modules/.package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend_wikigo-main/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend_wikigo-main/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend_wikigo-main/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend_wikigo-main/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,6 +46,7 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "Spring Boot.SearchApplication.executor": "Run",
     "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/home/discente/Documentos/WikiGo",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -52,8 +58,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.15989.150" />
-        <option value="bundled-js-predefined-1d06a55b98c1-91d5c284f522-JavaScript-IU-241.15989.150" />
+        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.17011.79" />
+        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-IU-241.17011.79" />
       </set>
     </attachedChunks>
   </component>
@@ -68,6 +74,8 @@
       <workItem from="1715611015717" duration="394000" />
       <workItem from="1715611430902" duration="29000" />
       <workItem from="1715627120776" duration="4643000" />
+      <workItem from="1716470460002" duration="529000" />
+      <workItem from="1716471041799" duration="196000" />
     </task>
     <servers />
   </component>
