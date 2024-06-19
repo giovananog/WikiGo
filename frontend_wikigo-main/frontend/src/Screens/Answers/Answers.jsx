@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import DarkMode from "../../components/DarkMode/DarkMode";
 import { useLocation, useNavigate } from "react-router-dom";
+import parse from 'html-react-parser';
 import wikiLogo from "../../assets/LOGO_NOVO.png";
 import "./Answers.css";
 import Button from '@mui/material/Button';
@@ -30,33 +31,70 @@ function Answers() {
   const [searchQuery, setSearchQuery] = useState(initialSearchQuery);
   const [visibleCount, setVisibleCount] = useState(7);
   const [anchorEl, setAnchorEl] = useState(null);
+  const [anchorElReadingTime, setAnchorElReadingTime] = useState(null);
+  const [anchorElAdvanced, setAnchorElAdvanced] = useState(null);
   const [modalOpen, setModalOpen] = useState(false);
   const [filterType, setFilterType] = useState("");
   const [date, setDate] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
+  const [fuzziness, setFuzziness] = useState(0);
+  const [readingTime, setReadingTime] = useState(0);
+  const [readingTimeEnd, setReadingTimeEnd] = useState(0);
+  const [mustNot, setMustNot] = useState("");
   const open = Boolean(anchorEl);
+  const openReadingTime = Boolean(anchorElReadingTime);
+  const openAdvanced = Boolean(anchorElAdvanced);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleClose = () => {
-    setAnchorEl(null);
+  const handleReadingTimeClick = (event) => {
+    setAnchorElReadingTime(event.currentTarget);
   };
 
-  const handleModalOpen = () => setModalOpen(true);
+  const handleAdvancedClick = (event) => {
+    setAnchorElAdvanced(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+    setAnchorElReadingTime(null);
+    setAnchorElAdvanced(null);
+  };
+
+  const handleModalOpen = (type) => {
+    setFilterType(type);
+    setModalOpen(true);
+  };
+
   const handleModalClose = () => setModalOpen(false);
 
   const fetchResults = async (searchQuery) => {
     try {
       let url = `http://localhost:8080/v1/search?query=${encodeURIComponent(searchQuery)}`;
-      if (filterType === "before") {
+
+      if (searchQuery.includes('"')) {
+        url = `http://localhost:8080/v1/search?query=${encodeURIComponent(searchQuery)}`;
+      } else if (filterType === "before") {
         url += `&filter=dt_creation&filter=lt&filter=${date}`;
       } else if (filterType === "after") {
         url += `&filter=dt_creation&filter=gte&filter=${date}`;
       } else if (filterType === "between") {
         url += `&filter=dt_creation&filter=between&filter=${startDate},${endDate}`;
+      } else if (filterType === "fuzziness") {
+        url += `&filter=fuzziness&filter=${fuzziness}`;
+      } else if (filterType === "reading_time_lt") {
+        url += `&filter=reading_time&filter=lt&filter=${readingTime}`;
+      } else if (filterType === "reading_time_gte") {
+        url += `&filter=reading_time&filter=gte&filter=${readingTime}`;
+      } else if (filterType === "reading_time_between") {
+        url += `&filter=reading_time&filter=between&filter=${readingTime},${readingTimeEnd}`;
+      } else if (filterType === "and") {
+        url += `&filter=and`;
+      } else if (filterType === "must_not") {
+        url += `&filter=mustNot&filter=${mustNot}`;
       }
       const response = await axios.get(url);
       return response.data;
@@ -108,31 +146,71 @@ function Answers() {
           <DarkMode />
         </div>
       </div>
-      <div className="date">
-        <div>
-          <Button
-            id="basic-button"
-            aria-controls={open ? 'basic-menu' : undefined}
-            aria-haspopup="true"
-            aria-expanded={open ? 'true' : undefined}
-            onClick={handleClick}
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="var(--font-color)"><path d="M200-80q-33 0-56.5-23.5T120-160v-560q0-33 23.5-56.5T200-800h40v-80h80v80h320v-80h80v80h40q33 0 56.5 23.5T840-720v560q0 33-23.5 56.5T760-80H200Zm0-80h560v-400H200v400Zm0-480h560v-80H200v80Zm0 0v-80 80Zm280 240q-17 0-28.5-11.5T440-440q0-17 11.5-28.5T480-480q17 0 28.5 11.5T520-440q0 17-11.5 28.5T480-400Zm-160 0q-17 0-28.5-11.5T280-440q0-17 11.5-28.5T320-480q17 0 28.5 11.5T360-440q0 17-11.5 28.5T320-400Zm320 0q-17 0-28.5-11.5T600-440q0-17 11.5-28.5T640-480q17 0 28.5 11.5T680-440q0 17-11.5 28.5T640-400ZM480-240q-17 0-28.5-11.5T440-280q0-17 11.5-28.5T480-320q17 0 28.5 11.5T520-280q0 17-11.5 28.5T480-240Zm-160 0q-17 0-28.5-11.5T280-280q0-17 11.5-28.5T320-320q17 0 28.5 11.5T360-280q0 17-11.5 28.5T320-240Zm320 0q-17 0-28.5-11.5T600-280q0-17 11.5-28.5T640-320q17 0 28.5 11.5T680-280q0 17-11.5 28.5T640-240Z" /></svg>
-          </Button>
-          <Menu
-            id="basic-menu"
-            anchorEl={anchorEl}
-            open={open}
-            onClose={handleClose}
-            MenuListProps={{
-              'aria-labelledby': 'basic-button',
-            }}
-          >
-            <MenuItem onClick={() => { setFilterType("before"); handleModalOpen(); handleClose(); }}>Antes de</MenuItem>
-            <MenuItem onClick={() => { setFilterType("after"); handleModalOpen(); handleClose(); }}>Depois de</MenuItem>
-            <MenuItem onClick={() => { setFilterType("between"); handleModalOpen(); handleClose(); }}>Entre</MenuItem>
-          </Menu>
-        </div>
+      <div className="filters">
+        <Button
+          id="data-button"
+          aria-controls={open ? 'data-menu' : undefined}
+          aria-haspopup="true"
+          aria-expanded={open ? 'true' : undefined}
+          onClick={handleClick}
+        >
+          Data
+        </Button>
+        <Menu
+          id="data-menu"
+          anchorEl={anchorEl}
+          open={open}
+          onClose={handleClose}
+          MenuListProps={{
+            'aria-labelledby': 'data-button',
+          }}
+        >
+          <MenuItem onClick={() => { handleModalOpen("before"); handleClose(); }}>Antes de</MenuItem>
+          <MenuItem onClick={() => { handleModalOpen("after"); handleClose(); }}>Depois de</MenuItem>
+          <MenuItem onClick={() => { handleModalOpen("between"); handleClose(); }}>Entre</MenuItem>
+        </Menu>
+        <Button
+          id="reading-time-button"
+          aria-controls={openReadingTime ? 'reading-time-menu' : undefined}
+          aria-haspopup="true"
+          aria-expanded={openReadingTime ? 'true' : undefined}
+          onClick={handleReadingTimeClick}
+        >
+          Tempo de Leitura
+        </Button>
+        <Menu
+          id="reading-time-menu"
+          anchorEl={anchorElReadingTime}
+          open={openReadingTime}
+          onClose={handleClose}
+          MenuListProps={{
+            'aria-labelledby': 'reading-time-button',
+          }}
+        >
+          <MenuItem onClick={() => { handleModalOpen("reading_time_lt"); handleClose(); }}>Menor que</MenuItem>
+          <MenuItem onClick={() => { handleModalOpen("reading_time_gte"); handleClose(); }}>Maior ou igual a</MenuItem>
+        </Menu>
+        <Button
+          id="advanced-options-button"
+          aria-controls={openAdvanced ? 'advanced-options-menu' : undefined}
+          aria-haspopup="true"
+          aria-expanded={openAdvanced ? 'true' : undefined}
+          onClick={handleAdvancedClick}
+        >
+          Opções Avançadas
+        </Button>
+        <Menu
+          id="advanced-options-menu"
+          anchorEl={anchorElAdvanced}
+          open={openAdvanced}
+          onClose={handleClose}
+          MenuListProps={{
+            'aria-labelledby': 'advanced-options-button',
+          }}
+        >
+          <MenuItem onClick={() => { handleModalOpen("fuzziness"); handleClose(); }}>Fuzziness</MenuItem>
+          <MenuItem onClick={() => { handleModalOpen("must_not"); handleClose(); }}>Must Not</MenuItem>
+        </Menu>
       </div>
       <Modal
         open={modalOpen}
@@ -142,7 +220,7 @@ function Answers() {
       >
         <Box sx={modalStyle}>
           <Typography id="modal-title" variant="h6" component="h2">
-            Selecionar Data
+            Selecionar Filtro
           </Typography>
           <Typography id="modal-description" sx={{ mt: 2 }}>
             {filterType === "before" || filterType === "after" ? (
@@ -167,6 +245,27 @@ function Answers() {
                   placeholder="Data final"
                 />
               </div>
+            ) : filterType === "fuzziness" ? (
+              <input
+                type="number"
+                value={fuzziness}
+                onChange={(e) => setFuzziness(e.target.value)}
+                placeholder="0, 1 ou 2"
+              />
+            ) : filterType === "reading_time_lt" || filterType === "reading_time_gte" ? (
+              <input
+                type="number"
+                value={readingTime}
+                onChange={(e) => setReadingTime(e.target.value)}
+                placeholder="Tempo de leitura (em minutos)"
+              />
+            ) : filterType === "must_not" ? (
+              <input
+                type="text"
+                value={mustNot}
+                onChange={(e) => setMustNot(e.target.value)}
+                placeholder="Termo que não deve aparecer"
+              />
             ) : null}
             <Button onClick={handleSearchSubmit} variant="contained" color="primary" sx={{ mt: 2 }}>
               Aplicar Filtro
@@ -181,8 +280,8 @@ function Answers() {
               {results.slice(0, visibleCount).map((result, index) => (
                 <li key={index}>
                   <p><a href={result.url} target="_blank" rel="noopener noreferrer">{result.url}</a></p>
-                  <h2><a href={result.url} target="_blank" rel="noopener noreferrer">{result.title}</a></h2>
-                  <h4>{result.abs}</h4>
+                  <h2><a href={result.url} target="_blank" rel="noopener noreferrer">{parse(result.title)}</a></h2>
+                  <h4>{parse(result.abs)}</h4>
                 </li>
               ))}
             </ul>
