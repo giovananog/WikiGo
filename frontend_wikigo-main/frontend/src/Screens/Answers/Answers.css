@@ -17,7 +17,6 @@ a:hover {
   text-decoration: underline;
 }
 
-
 .logo_answer {
   width: 150px;
   height: 150px;
@@ -37,7 +36,6 @@ a:hover {
   border: 2px solid;
   border-color: var(--border_color);
 }
-
 
 h1 {
   font-family: "Alegreya SC", serif;
@@ -89,8 +87,6 @@ h1 {
   font-size: 1em;
   padding-bottom: 0.5em;
   border-radius: 20px;
-  background-color: var(--button_color);
-  color: var(--button_text_color);
 }
 
 .formSearch_ans .searchButton_ans img {
@@ -118,7 +114,6 @@ h1 {
   position: absolute;
   right: 20px;
   top: 10px;
-
 }
 
 .resultados {
@@ -160,10 +155,38 @@ h1 {
   border-color: var(--border_color);
 }
 
-.date{
+.date {
   font-size: 0.8em;
   justify-content: left;
   align-items: left;
   display: flex;
   padding-right: 91%;
 }
+
+.modalStyle {
+  justify-content: center;
+  text-align: center;
+  align-content: center;
+  align-self: center;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  height: 200px;
+  background-color: var(--Header_background);
+  color: var(--text_color);
+  box-shadow: 24px;
+  padding: 4px;
+}
+
+.modal-button {
+  margin-top: 16px;
+  background-color: var(--Modal_button_background) !important ;
+  color: var(--text_color) !important;
+}
+
+
+
+

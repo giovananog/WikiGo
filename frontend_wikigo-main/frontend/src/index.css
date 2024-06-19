@@ -9,6 +9,10 @@
   --mais_resultados_background: #fff;
   --border_color: #afadad;
   --icon-color: black;
+  --button_color: #e8f1f1;
+  --button_hover_color: #b6cece;
+  --Modal_button_background: #e4e4e4;
+  
 }
 
 [data-theme="dark"] {
@@ -22,7 +26,9 @@
   --mais_resultados_background: rgb(255,255,255,0.18);
   --border_color: #111111;
   --icon-color: white;
-
+  --button_color: #030218;
+  --button_hover_color: #080629;
+  --Modal_button_background: #222222;
 }
 
 *{

@@ -1,27 +1,28 @@
-import React, { useState } from "react";
-import axios from "axios";
-import DarkMode from "../../components/DarkMode/DarkMode";
-import { useLocation, useNavigate } from "react-router-dom";
-import parse from 'html-react-parser';
-import wikiLogo from "../../assets/LOGO_NOVO.png";
-import "./Answers.css";
+import * as React from 'react';
+import Box from '@mui/material/Box';
+import Slider from '@mui/material/Slider';
+import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Modal from '@mui/material/Modal';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
+import { useState } from 'react';
+import axios from 'axios';
+import DarkMode from '../../components/DarkMode/DarkMode';
+import { useLocation, useNavigate } from 'react-router-dom';
+import parse from 'html-react-parser';
+import wikiLogo from '../../assets/LOGO_NOVO.png';
+import './Answers.css';
 
-const modalStyle = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'background.paper',
-  boxShadow: 24,
-  p: 4,
-};
+const marks = [
+  { value: 0, label: 'Especifica' },
+  { value: 1, label: 'Generalizada' },
+  { value: 2, label: 'Muito Generalizada' },
+];
+
+function valuetext(value) {
+  return `${value}`;
+}
 
 function Answers() {
   const location = useLocation();
@@ -147,78 +148,118 @@ function Answers() {
         </div>
       </div>
       <div className="filters">
-        <Button
-          id="data-button"
-          aria-controls={open ? 'data-menu' : undefined}
-          aria-haspopup="true"
-          aria-expanded={open ? 'true' : undefined}
-          onClick={handleClick}
-        >
-          Data
-        </Button>
-        <Menu
-          id="data-menu"
-          anchorEl={anchorEl}
-          open={open}
-          onClose={handleClose}
-          MenuListProps={{
-            'aria-labelledby': 'data-button',
-          }}
-        >
-          <MenuItem onClick={() => { handleModalOpen("before"); handleClose(); }}>Antes de</MenuItem>
-          <MenuItem onClick={() => { handleModalOpen("after"); handleClose(); }}>Depois de</MenuItem>
-          <MenuItem onClick={() => { handleModalOpen("between"); handleClose(); }}>Entre</MenuItem>
-        </Menu>
-        <Button
-          id="reading-time-button"
-          aria-controls={openReadingTime ? 'reading-time-menu' : undefined}
-          aria-haspopup="true"
-          aria-expanded={openReadingTime ? 'true' : undefined}
-          onClick={handleReadingTimeClick}
-        >
-          Tempo de Leitura
-        </Button>
-        <Menu
-          id="reading-time-menu"
-          anchorEl={anchorElReadingTime}
-          open={openReadingTime}
-          onClose={handleClose}
-          MenuListProps={{
-            'aria-labelledby': 'reading-time-button',
-          }}
-        >
-          <MenuItem onClick={() => { handleModalOpen("reading_time_lt"); handleClose(); }}>Menor que</MenuItem>
-          <MenuItem onClick={() => { handleModalOpen("reading_time_gte"); handleClose(); }}>Maior ou igual a</MenuItem>
-        </Menu>
-        <Button
-          id="advanced-options-button"
-          aria-controls={openAdvanced ? 'advanced-options-menu' : undefined}
-          aria-haspopup="true"
-          aria-expanded={openAdvanced ? 'true' : undefined}
-          onClick={handleAdvancedClick}
-        >
-          Opções Avançadas
-        </Button>
-        <Menu
-          id="advanced-options-menu"
-          anchorEl={anchorElAdvanced}
-          open={openAdvanced}
-          onClose={handleClose}
-          MenuListProps={{
-            'aria-labelledby': 'advanced-options-button',
-          }}
-        >
-          <MenuItem onClick={() => { handleModalOpen("fuzziness"); handleClose(); }}>Fuzziness</MenuItem>
-          <MenuItem onClick={() => { handleModalOpen("must_not"); handleClose(); }}>Must Not</MenuItem>
-        </Menu>
-      </div>
+  <Button
+    id="data-button"
+    aria-controls={open ? 'data-menu' : undefined}
+    aria-haspopup="true"
+    aria-expanded={open ? 'true' : undefined}
+    onClick={handleClick}
+    sx={{
+      backgroundColor: 'var(--Header_background)',
+      color: 'var(--text_color)',
+      '&:hover': {
+        backgroundColor: 'var(--Header_background)',
+      },
+    }}
+  >
+    Data
+  </Button>
+  <Menu
+    id="data-menu"
+    anchorEl={anchorEl}
+    open={open}
+    onClose={handleClose}
+    MenuListProps={{
+      'aria-labelledby': 'data-button',
+    }}
+    sx={{
+      '& .MuiPaper-root': {
+        backgroundColor: 'var(--Header_background)',
+        color: 'var(--text_color)',
+      },
+    }}
+  >
+    <MenuItem onClick={() => { handleModalOpen("before"); handleClose(); }}>Antes de</MenuItem>
+    <MenuItem onClick={() => { handleModalOpen("after"); handleClose(); }}>Depois de</MenuItem>
+    <MenuItem onClick={() => { handleModalOpen("between"); handleClose(); }}>Entre</MenuItem>
+  </Menu>
+  <Button
+    id="reading-time-button"
+    aria-controls={openReadingTime ? 'reading-time-menu' : undefined}
+    aria-haspopup="true"
+    aria-expanded={openReadingTime ? 'true' : undefined}
+    onClick={handleReadingTimeClick}
+    sx={{
+      backgroundColor: 'var(--Header_background)',
+      color: 'var(--text_color)',
+      '&:hover': {
+        backgroundColor: 'var(--Header_background)',
+      },
+    }}
+  >
+    Tempo de Leitura
+  </Button>
+  <Menu
+    id="reading-time-menu"
+    anchorEl={anchorElReadingTime}
+    open={openReadingTime}
+    onClose={handleClose}
+    MenuListProps={{
+      'aria-labelledby': 'reading-time-button',
+    }}
+    sx={{
+      '& .MuiPaper-root': {
+        backgroundColor: 'var(--Header_background)',
+        color: 'var(--text_color)',
+      },
+    }}
+  >
+    <MenuItem onClick={() => { handleModalOpen("reading_time_lt"); handleClose(); }}>Menor que</MenuItem>
+    <MenuItem onClick={() => { handleModalOpen("reading_time_gte"); handleClose(); }}>Maior ou igual a</MenuItem>
+  </Menu>
+  <Button
+    id="advanced-options-button"
+    aria-controls={openAdvanced ? 'advanced-options-menu' : undefined}
+    aria-haspopup="true"
+    aria-expanded={openAdvanced ? 'true' : undefined}
+    onClick={handleAdvancedClick}
+    sx={{
+      backgroundColor: 'var(--Header_background)',
+      color: 'var(--text_color)',
+      '&:hover': {
+        backgroundColor: 'var(--Header_background)',
+      },
+    }}
+  >
+    Opções Avançadas
+  </Button>
+  <Menu
+    id="advanced-options-menu"
+    anchorEl={anchorElAdvanced}
+    open={openAdvanced}
+    onClose={handleClose}
+    MenuListProps={{
+      'aria-labelledby': 'advanced-options-button',
+    }}
+    sx={{
+      '& .MuiPaper-root': {
+        backgroundColor: 'var(--Header_background)',
+        color: 'var(--text_color)',
+      },
+    }}
+  >
+    <MenuItem onClick={() => { handleModalOpen("fuzziness"); handleClose(); }}>Generalização da Busca</MenuItem>
+    <MenuItem onClick={() => { handleModalOpen("must_not"); handleClose(); }}>Proibir Palavra</MenuItem>
+  </Menu>
+</div>
+
       <Modal
         open={modalOpen}
         onClose={handleModalClose}
         aria-labelledby="modal-title"
         aria-describedby="modal-description"
       >
-        <Box sx={modalStyle}>
+        <Box className="modalStyle">
           <Typography id="modal-title" variant="h6" component="h2">
             Selecionar Filtro
           </Typography>
@@ -246,12 +287,29 @@ function Answers() {
                 />
               </div>
             ) : filterType === "fuzziness" ? (
-              <input
-                type="number"
-                value={fuzziness}
-                onChange={(e) => setFuzziness(e.target.value)}
-                placeholder="0, 1 ou 2"
-              />
+              <Box sx={{ width: 300 }}>
+                <Slider
+                  style={{ color: 'var(--text_color)' }} 
+                  aria-label="Fuzziness"
+                  defaultValue={0}
+                  getAriaValueText={valuetext}
+                  step={null}
+                  marks={marks}
+                  min={0}
+                  max={2}
+                  valueLabelDisplay="auto"
+                  value={fuzziness}
+                  onChange={(e, newValue) => setFuzziness(newValue)}
+                  sx={{
+                    '& .MuiSlider-markLabel': {
+                      color: 'var(--text_color)',
+                    },
+                    '& .MuiSlider-valueLabel': {
+                      color: 'var(--text_color)',
+                    },
+                  }}
+                />
+              </Box>
             ) : filterType === "reading_time_lt" || filterType === "reading_time_gte" ? (
               <input
                 type="number"
@@ -267,7 +325,7 @@ function Answers() {
                 placeholder="Termo que não deve aparecer"
               />
             ) : null}
-            <Button onClick={handleSearchSubmit} variant="contained" color="primary" sx={{ mt: 2 }}>
+            <Button onClick={handleSearchSubmit} variant="contained" className="modal-button">
               Aplicar Filtro
             </Button>
           </Typography>
