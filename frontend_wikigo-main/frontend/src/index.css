@@ -8,7 +8,12 @@
   --Ansewer_background: #fff;
   --mais_resultados_background: #fff;
   --border_color: #afadad;
+  --modal_border_color: #afadad;
   --icon-color: black;
+  --button_color: #e8f1f1;
+  --button_hover_color: #afadad;
+  --Modal_button_background: #e4e4e4;
+  
 }
 
 [data-theme="dark"] {
@@ -21,8 +26,11 @@
   --Ansewer_background: #222222;
   --mais_resultados_background: rgb(255,255,255,0.18);
   --border_color: #111111;
+  --modal_border_color: #333333;
   --icon-color: white;
-
+  --button_color: #030218;
+  --button_hover_color: #111111;
+  --Modal_button_background: #222222;
 }
 
 *{
