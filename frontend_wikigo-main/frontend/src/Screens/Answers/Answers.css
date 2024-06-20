@@ -164,29 +164,55 @@ h1 {
 }
 
 .modalStyle {
+  display: flex;
+  flex-direction: column;
   justify-content: center;
-  text-align: center;
-  align-content: center;
-  align-self: center;
   align-items: center;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 400px;
-  height: 200px;
   background-color: var(--Header_background);
   color: var(--text_color);
   box-shadow: 24px;
-  padding: 4px;
+  padding: 20px;
+  border-radius: 30px;
+  border: 2px solid;
+  border-color: var(--modal_border_color);
+}
+
+.modal-input-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  background-color: var(--Header_background);
+}
+
+.modal-input-container input,
+.modal-input-container .MuiSlider-root {
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  width: 80%;
 }
 
 .modal-button {
-  margin-top: 16px;
-  background-color: var(--Modal_button_background) !important ;
+  border-radius: 100px;
+  margin-top: 20px;
+  background-color: var(--Modal_button_background) !important;
   color: var(--text_color) !important;
 }
 
+.filters {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: 100px;
+  width: 100%;
+}
 
 
 
