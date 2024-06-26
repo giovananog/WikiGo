@@ -26,6 +26,7 @@ import org.springframework.stereotype.Component;
 import org.slf4j.LoggerFactory;
 
 
+
 import java.io.IOException;
 
 @Component
@@ -82,18 +83,25 @@ public class EsClient {
         }
     }
 
-//    public SearchResponse<ObjectNode> processSuggestions(String text) {
-//        try {
-//            Suggester suggester = Suggester.of(s -> s.suggesters("my-suggestion", FieldSuggester.of(b -> b.text(text).term(TermSuggester.of(t -> t.size(2).field("content"))))));
-//
-//            return elasticsearchClient.search(s -> s
-//                    .index("wikipedia").from(0).size(10000)
-//                    .suggest(suggester), ObjectNode.class);
-//
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
-//    }
+    public SearchResponse<ObjectNode> processSuggestions(String text) {
+        try {
+            Suggester suggester = Suggester.of(s -> s
+                    .suggesters("my-suggestion", FieldSuggester.of(b -> b
+                            .text(text)
+                            .term(TermSuggester.of(t -> t.size(2).field("content")))
+                    ))
+            );
+
+            return elasticsearchClient.search(s -> s
+                    .index("wikipedia")
+                    .from(0)
+                    .size(10000)
+                    .suggest(suggester), ObjectNode.class);
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     // execute query with sort field
     public SearchResponse<ObjectNode> executeSearchQueryWithSortField(Query finalMatchQuery, String fieldName, String sortOrder) {

@@ -1,15 +1,13 @@
 package com.elasticsearch.search.service;
+import co.elastic.clients.elasticsearch.core.SearchResponse;
 import co.elastic.clients.elasticsearch.core.search.*;
 import com.elasticsearch.search.api.model.Result;
 import com.elasticsearch.search.domain.EsClient;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.function.BiFunction;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -57,6 +55,12 @@ public class SearchService {
             searchResponse = esClient.searchWithoutFilters(query);
         }
 
+//        // Check if the response contains suggestions
+//        if (searchResponse.suggest() != null) {
+//            // Process suggestions and return them
+//            return processSuggestions(searchResponse);
+//        }
+
         List<Hit<ObjectNode>> hits = searchResponse.hits().hits();
 
         // Adicionar log para verificar os hits
@@ -76,11 +80,47 @@ public class SearchService {
         return resultsList;
     }
 
+//    private List<Result> processSuggestions(SearchResponse<ObjectNode> searchResponse) {
+//        List<Result> suggestionsList = new ArrayList<>();
+//
+//        // Verifique se há sugestões
+//        if (searchResponse.suggest() != null) {
+//            // Iterar sobre as sugestões
+//            for (Map.Entry<String, List<Suggestion<ObjectNode>>> suggestEntry : searchResponse.suggest().entrySet()) {
+//                for (Suggestion<ObjectNode> suggestion : suggestEntry.getValue()) {
+//                    // Verificar se é uma sugestão de termo
+//                    if (suggestion instanceof TermSuggestion) {
+//                        TermSuggestion termSuggestion = (TermSuggestion) suggestion;
+//                        for (TermSuggestion.Entry entry : termSuggestion.entries()) {
+//                            for (TermSuggestion.Entry.Option option : entry.options()) {
+//                                // Extrair o termo sugerido
+//                                String suggestedTerm = option.text().string();
+//
+//                                // Criar um objeto Result para armazenar a sugestão
+//                                Result suggestionResult = new Result()
+//                                        .abs(suggestedTerm)  // Aqui você pode definir o termo sugerido como abstract ou em outro campo apropriado
+//                                        .title("Suggestion") // Título para indicar que é uma sugestão
+//                                        .url("");            // URL vazia, pois é uma sugestão e não possui URL associada
+//
+//                                // Adicionar a sugestão à lista de sugestões
+//                                suggestionsList.add(suggestionResult);
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//
+//        return suggestionsList;
+//    }
+
+
     private String treatContent(String content) {
         content = content.replaceAll("</?(som|math)\\d*>", "");
-        content = content.replaceAll("[^A-Za-z\\s]+", "");
+        content = content.replaceAll("(?!<strong>|</strong>)[^A-Za-z\\s<>/]+", "");
         content = content.replaceAll("\\s+", " ");
-        content = content.replaceAll("^\\s+", "");
+        content = content.replaceAll("^\\s+", "").replaceAll("\\s+$", "");
         return content;
     }
+
 }
