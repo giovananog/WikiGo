@@ -5,8 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="454e7837-af94-49c1-aac6-bf1a6c617480" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/frontend_wikigo-main/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend_wikigo-main/frontend/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend_wikigo-main/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend_wikigo-main/frontend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/search/src/main/java/com/elasticsearch/search/SearchApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/search/src/main/java/com/elasticsearch/search/SearchApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/search/src/main/java/com/elasticsearch/search/controller/SearchController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/search/src/main/java/com/elasticsearch/search/controller/SearchController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/search/src/main/java/com/elasticsearch/search/domain/EsClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/search/src/main/java/com/elasticsearch/search/domain/EsClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/search/src/main/java/com/elasticsearch/search/service/SearchService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/search/src/main/java/com/elasticsearch/search/service/SearchService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/search/target/classes/com/elasticsearch/search/api/facade/SearchApi.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/search/target/classes/com/elasticsearch/search/api/facade/SearchApi.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/search/target/classes/com/elasticsearch/search/controller/SearchController.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/search/target/classes/com/elasticsearch/search/controller/SearchController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/search/target/classes/com/elasticsearch/search/domain/EsClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/search/target/classes/com/elasticsearch/search/domain/EsClient.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/search/target/classes/com/elasticsearch/search/service/SearchService.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/search/target/classes/com/elasticsearch/search/service/SearchService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/search/target/generated-sources/openapi/src/main/java/com/elasticsearch/search/api/facade/SearchApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/search/target/generated-sources/openapi/src/main/java/com/elasticsearch/search/api/facade/SearchApi.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,8 +60,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.17890.1" />
-        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-IU-241.17890.1" />
+        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.18034.62" />
+        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-IU-241.18034.62" />
       </set>
     </attachedChunks>
   </component>
@@ -71,6 +79,8 @@
       <workItem from="1716470460002" duration="529000" />
       <workItem from="1716471041799" duration="2494000" />
       <workItem from="1718895979987" duration="335000" />
+      <workItem from="1719433221488" duration="3594000" />
+      <workItem from="1719503693830" duration="763000" />
     </task>
     <servers />
   </component>

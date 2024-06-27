@@ -1,6 +1,7 @@
 package com.elasticsearch.search.service;
 import co.elastic.clients.elasticsearch.core.SearchResponse;
 import co.elastic.clients.elasticsearch.core.search.*;
+import co.elastic.clients.util.TriFunction;
 import com.elasticsearch.search.api.model.Result;
 import com.elasticsearch.search.domain.EsClient;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -8,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.function.BiFunction;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,7 +19,7 @@ public class SearchService {
     private static final Logger logger = LoggerFactory.getLogger(SearchService.class);
     private final EsClient esClient;
 
-    private final Map<String, BiFunction<String, String[], co.elastic.clients.elasticsearch.core.SearchResponse>> queryMethods;
+    private final Map<String, TriFunction<String, Integer, String[], SearchResponse<ObjectNode>>> queryMethods;
 
     public SearchService(EsClient esClient) {
         this.esClient = esClient;
@@ -32,13 +32,13 @@ public class SearchService {
         queryMethods.put("mustNot", esClient::searchWithMustNot);
     }
 
-    public List<Result> submitQuery(String query, String... filters) {
-        logger.info("Submitting query: query={}, filters={}", query, filters);
+    public List<Result> submitQuery(String query, Integer page, String... filters) {
+        logger.info("Submitting query: query={}, filters={}, page={}", query, filters, page);
         co.elastic.clients.elasticsearch.core.SearchResponse searchResponse = null;
 
         if (filters != null && filters.length > 0) {
             String queryType = filters[0].replaceAll("\"", "");
-            BiFunction<String, String[], co.elastic.clients.elasticsearch.core.SearchResponse> queryMethod = queryMethods.getOrDefault(queryType, null);
+            TriFunction<String, Integer, String[], SearchResponse<ObjectNode>> queryMethod = queryMethods.getOrDefault(queryType, null);
 
             if (queryMethod != null) {
                 String[] filterParams = Arrays.stream(filters)
@@ -46,20 +46,14 @@ public class SearchService {
                         .map(f -> f.replaceAll("\"", ""))
                         .toArray(String[]::new);
                 logger.info("Executing query method for type: {}", queryType);
-                searchResponse = queryMethod.apply(query, filterParams);
+                searchResponse = queryMethod.apply(query, page, filterParams);
             }
         }
 
         if (searchResponse == null) {
             logger.info("No specific filters applied, executing default search");
-            searchResponse = esClient.searchWithoutFilters(query);
+            searchResponse = esClient.searchWithoutFilters(query, page);
         }
-
-//        // Check if the response contains suggestions
-//        if (searchResponse.suggest() != null) {
-//            // Process suggestions and return them
-//            return processSuggestions(searchResponse);
-//        }
 
         List<Hit<ObjectNode>> hits = searchResponse.hits().hits();
 
@@ -79,40 +73,6 @@ public class SearchService {
 
         return resultsList;
     }
-
-//    private List<Result> processSuggestions(SearchResponse<ObjectNode> searchResponse) {
-//        List<Result> suggestionsList = new ArrayList<>();
-//
-//        // Verifique se há sugestões
-//        if (searchResponse.suggest() != null) {
-//            // Iterar sobre as sugestões
-//            for (Map.Entry<String, List<Suggestion<ObjectNode>>> suggestEntry : searchResponse.suggest().entrySet()) {
-//                for (Suggestion<ObjectNode> suggestion : suggestEntry.getValue()) {
-//                    // Verificar se é uma sugestão de termo
-//                    if (suggestion instanceof TermSuggestion) {
-//                        TermSuggestion termSuggestion = (TermSuggestion) suggestion;
-//                        for (TermSuggestion.Entry entry : termSuggestion.entries()) {
-//                            for (TermSuggestion.Entry.Option option : entry.options()) {
-//                                // Extrair o termo sugerido
-//                                String suggestedTerm = option.text().string();
-//
-//                                // Criar um objeto Result para armazenar a sugestão
-//                                Result suggestionResult = new Result()
-//                                        .abs(suggestedTerm)  // Aqui você pode definir o termo sugerido como abstract ou em outro campo apropriado
-//                                        .title("Suggestion") // Título para indicar que é uma sugestão
-//                                        .url("");            // URL vazia, pois é uma sugestão e não possui URL associada
-//
-//                                // Adicionar a sugestão à lista de sugestões
-//                                suggestionsList.add(suggestionResult);
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//
-//        return suggestionsList;
-//    }
 
 
     private String treatContent(String content) {

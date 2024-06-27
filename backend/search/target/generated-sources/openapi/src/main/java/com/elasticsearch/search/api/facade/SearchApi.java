@@ -43,6 +43,7 @@ public interface SearchApi {
      * GET /search : Submits a query to Elasticsearch with optional filter
      *
      * @param query  Query to be submitted (optional)
+     * @param page  Page to be returned (optional)
      * @param filter Filter to be applied (optional)
      * @return OK (status code 200) or Unexpected error (status code 500)
      */
@@ -55,6 +56,7 @@ public interface SearchApi {
             method = RequestMethod.GET)
     default CompletableFuture<ResponseEntity<List<Result>>> searchWithFilter(
             @ApiParam(value = "Query to be submitted") @Valid @RequestParam(value = "query", required = false) String query,
+            @ApiParam(value = "Page number") @RequestParam(value = "page", required = false) Integer page,
             @ApiParam(value = "Filter to be applied") @RequestParam(value = "filter", required = false) String... filter) {
         return CompletableFuture.supplyAsync(() -> {
             getRequest().ifPresent(request -> {

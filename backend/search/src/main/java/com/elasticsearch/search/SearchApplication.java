@@ -15,9 +15,9 @@ public class SearchApplication implements WebMvcConfigurer {
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/v1/**")  // Adapte o caminho conforme necessário
-                .allowedOrigins("http://localhost:5173")  // Permite CORS de localhost:5173
-                .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")  // Métodos permitidos
+        registry.addMapping("/v1/**")
+                .allowedOrigins("http://localhost:5173")
+                .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                 .allowCredentials(true)
                 .allowedHeaders("*");
     }
