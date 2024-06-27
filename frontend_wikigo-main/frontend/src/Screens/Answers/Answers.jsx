@@ -30,7 +30,8 @@ function Answers() {
   const results = location.state ? location.state.results : [];
   const initialSearchQuery = location.state ? location.state.searchQuery : "";
   const [searchQuery, setSearchQuery] = useState(initialSearchQuery);
-  const [visibleCount, setVisibleCount] = useState(7);
+  const [page, setPage] = useState(1);
+  const [totalResults, setTotalResults] = useState(results);
   const [anchorEl, setAnchorEl] = useState(null);
   const [anchorElReadingTime, setAnchorElReadingTime] = useState(null);
   const [anchorElAdvanced, setAnchorElAdvanced] = useState(null);
@@ -72,9 +73,9 @@ function Answers() {
 
   const handleModalClose = () => setModalOpen(false);
 
-  const fetchResults = async (searchQuery) => {
+  const fetchResults = async (searchQuery, page = 1) => {
     try {
-      let url = `http://localhost:8080/v1/search?query=${encodeURIComponent(searchQuery)}`;
+      let url = `http://localhost:8080/v1/search?query=${encodeURIComponent(searchQuery)}&page=${page}`;
       if (filterType === "before") {
         url += `&filter=dt_creation&filter=lt&filter=${date}`;
       } else if (filterType === "after") {
@@ -89,8 +90,6 @@ function Answers() {
         url += `&filter=reading_time&filter=gte&filter=${readingTime}`;
       } else if (filterType === "reading_time_between") {
         url += `&filter=reading_time&filter=between&filter=${readingTime},${readingTimeEnd}`;
-      } else if (filterType === "and") {
-        url += `&filter=and`;
       } else if (filterType === "must_not") {
         url += `&filter=mustNot&filter=${mustNot}`;
       }
@@ -104,13 +103,18 @@ function Answers() {
 
   const handleSearchSubmit = async (e) => {
     e.preventDefault();
-    const results = await fetchResults(searchQuery);
+    setPage(1);
+    const results = await fetchResults(searchQuery, 1);
+    setTotalResults(results);
     navigate('/answers', { state: { results, searchQuery } });
     handleModalClose();
   };
 
-  const loadMore = () => {
-    setVisibleCount(prevCount => prevCount + 4);
+  const loadMore = async () => {
+    const nextPage = page + 1;
+    const newResults = await fetchResults(searchQuery, nextPage);
+    setPage(nextPage);
+    setTotalResults((prevResults) => [...prevResults, ...newResults]);
   };
 
   const goToHomePage = () => {
@@ -335,9 +339,9 @@ function Answers() {
 
       <div className="resultados">
         {
-          results.length > 0 ? (
+          totalResults.length > 0 ? (
             <ul>
-              {results.slice(0, visibleCount).map((result, index) => (
+              {totalResults.map((result, index) => (
                 <li key={index}>
                   <p><a href={result.url} target="_blank" rel="noopener noreferrer">{result.url}</a></p>
                   <h2><a href={result.url} target="_blank" rel="noopener noreferrer">{parse(result.title)}</a></h2>
@@ -350,7 +354,7 @@ function Answers() {
           )
         }
         {
-          visibleCount < results.length && (
+          totalResults.length > 0 && (
             <div className="mais_resultados">
               <button onClick={loadMore}>Mais Resultados</button>
             </div>
