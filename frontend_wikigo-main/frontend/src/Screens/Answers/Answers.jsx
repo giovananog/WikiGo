@@ -81,7 +81,7 @@ function Answers() {
       } else if (filterType === "after") {
         url += `&filter=dt_creation&filter=gte&filter=${date}`;
       } else if (filterType === "between") {
-        url += `&filter=dt_creation&filter=between&filter=${startDate},${endDate}`;
+        url += `&filter=dt_creation&filter=gte&filter=${startDate}&filter=dt_creation&filter=lt&filter=${endDate}`;
       } else if (filterType === "fuzziness") {
         url += `&filter=fuzziness&filter=${fuzziness}`;
       } else if (filterType === "reading_time_lt") {
@@ -93,6 +93,7 @@ function Answers() {
       } else if (filterType === "must_not") {
         url += `&filter=mustNot&filter=${mustNot}`;
       }
+      console.log("URL: ", url); // Log para verificar a URL construída
       const response = await axios.get(url);
       return response.data;
     } catch (error) {
