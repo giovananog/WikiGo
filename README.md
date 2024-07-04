@@ -69,5 +69,3 @@ People who contributed to this project:
 <br><br>
 
 > This project provided an opportunity to learn and apply advanced concepts of ElasticSearch and web development, strengthening frontend and backend skills through collaboration and innovation.
-
-<br><br>
