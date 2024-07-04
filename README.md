@@ -45,7 +45,7 @@
 
 People who contributed to this project:
 
-<table>
+<table align='center'>
   <tr>
     <td align="center">
       <a href="https://github.com/giovananog">
